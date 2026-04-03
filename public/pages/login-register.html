@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/login-register.css">
+    <link rel="stylesheet" href="../css/dialogs.css">
+      <script type="module" src="../js/dialogs.js"></script>
+      <script type="module" src="../js/firebaseauth.js"></script>
+</head>
+<body>
+    <div class="container" id="signup" style="display:none;">
+      <a href="../index.html" class="back-link">&larr; Back to Home</a>
+      <div class="brand">
+        <img src="../images/logo.png" alt="Bloom Florals" class="brand__logo">
+      </div>
+      <h1 class="form-title">Register</h1>
+      <form method="post" action="">
+        <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
+        <div class="input-group">
+           <i class="fas fa-user"></i>
+           <input type="text" id="fName" placeholder="Enter first name" minlength="2" maxlength="50" required>
+           <label for="fName">First Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="lName" placeholder="Enter last name" minlength="2" maxlength="50" required>
+            <label for="lName">Last Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="rEmail" placeholder="Enter email address" maxlength="254" required>
+            <label for="rEmail">Email</label>
+        </div>
+        <div class="input-group input-group--password">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="rPassword" placeholder="Create password" minlength="8" maxlength="64" required>
+            <button type="button" class="password-toggle" data-target="rPassword" aria-label="Show password" aria-pressed="false">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            </button>
+            <label for="rPassword">Password</label>
+        </div>
+        <div class="input-group input-group--password">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="rPasswordConfirm" placeholder="Confirm password" minlength="8" maxlength="64" required>
+            <button type="button" class="password-toggle" data-target="rPasswordConfirm" aria-label="Show password" aria-pressed="false">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            </button>
+            <label for="rPasswordConfirm">Confirm Password</label>
+        </div>
+       <button class="btn" id="submitSignUp" >Sign Up</button>
+      </form>
+      <p class="or">or</p>
+      <div class="icons">
+        <button type="button" class="social-btn" data-provider="google" aria-label="Continue with Google">
+          <i class="fab fa-google"></i>
+        </button>
+        <button type="button" class="social-btn" data-provider="facebook" aria-label="Continue with Facebook">
+          <i class="fab fa-facebook"></i>
+        </button>
+        <button type="button" class="social-btn" data-provider="microsoft" aria-label="Continue with Microsoft">
+          <i class="fab fa-microsoft"></i>
+        </button>
+      </div>
+      <div class="links">
+        <p>Already Have Account ?</p>
+        <button id="signInButton">Sign In</button>
+      </div>
+    </div>
+  <div class="container" id="signIn">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+        <div class="brand">
+          <img src="../images/logo.png" alt="Bloom Florals" class="brand__logo">
+        </div>
+        <h1 class="form-title">Sign In</h1>
+        <form method="post" action="">
+          <div id="signInMessage" class="messageDiv" style="display:none;"></div>
+
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="email" placeholder="Enter email address" maxlength="254" required>
+              <label for="email">Email</label>
+          </div>
+          <div class="input-group input-group--password">
+              <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="Enter password" minlength="6" maxlength="64" required>
+              <button type="button" class="password-toggle" data-target="password" aria-label="Show password" aria-pressed="false">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+              </button>
+              <label for="password">Password</label>
+          </div>
+         <button  class="btn"  id="submitSignIn">Sign In</button>
+        </form>
+        <p class="or">or</p>
+        <div class="icons">
+          <button type="button" class="social-btn" data-provider="google" aria-label="Continue with Google">
+            <i class="fab fa-google"></i>
+          </button>
+          <button type="button" class="social-btn" data-provider="facebook" aria-label="Continue with Facebook">
+            <i class="fab fa-facebook"></i>
+          </button>
+          <button type="button" class="social-btn" data-provider="microsoft" aria-label="Continue with Microsoft">
+            <i class="fab fa-microsoft"></i>
+          </button>
+        </div>
+        <div class="links">
+          <p>Don't have account yet?</p>
+          <button id="signUpButton">Sign Up</button>
+        </div>
+      </div>
+  <div class="container" id="completeAccountSetup" style="display:none;">
+        <p class="or" style="margin-bottom: 1rem;">Account confirmed. Complete setup to continue.</p>
+        <div class="brand">
+          <img src="../images/logo.png" alt="Bloom Florals" class="brand__logo">
+        </div>
+        <h1 class="form-title">Complete Account Setup</h1>
+        <form method="post" action="">
+          <div id="completeSetupMessage" class="messageDiv" style="display:none;"></div>
+
+          <p class="or" style="margin-bottom: 1rem;">Create a password to enable email + password sign-in for this account.</p>
+
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="setupEmail" placeholder="Account email" maxlength="254" readonly>
+              <label for="setupEmail">Email</label>
+          </div>
+          <div class="input-group input-group--password">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="setupPassword" placeholder="Create password" minlength="8" maxlength="64" required>
+              <button type="button" class="password-toggle" data-target="setupPassword" aria-label="Show password" aria-pressed="false">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+              </button>
+              <label for="setupPassword">Password</label>
+          </div>
+          <div class="input-group input-group--password">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="setupPasswordConfirm" placeholder="Confirm password" minlength="8" maxlength="64" required>
+              <button type="button" class="password-toggle" data-target="setupPasswordConfirm" aria-label="Show password" aria-pressed="false">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+              </button>
+              <label for="setupPasswordConfirm">Confirm Password</label>
+          </div>
+          <button class="btn" id="submitCompleteSetup">Complete Setup</button>
+        </form>
+      </div>
+</body>
+</html>
+
+

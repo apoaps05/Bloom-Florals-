@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom Florals</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/dialogs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            
+            <!-- Logo -->
+            <a href="#home" class="navbar__logo">
+                <img src="images/logo.png" alt="Bloom Florals">
+                <span class="logo-text">Bloom Florals</span>
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="navbar__toggle" id="mobile-menu" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Navigation Menu -->
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="#home" class="navbar__links">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#about" class="navbar__links">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#services" class="navbar__links">
+                        <span>Services</span>
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#gallery" class="navbar__links">
+                        <span>Gallery</span>
+                    </a>
+                </li>
+
+                <li class="navbar__item navbar__auth">
+                    <a href="pages/login-register.html" class="navbar__links" id="login-cta">
+                        <span>Sign In / Register</span>
+                    </a>
+                </li>
+
+                <!-- Profile Dropdown -->
+                <li class="navbar__profile">
+                    <button class="profile-trigger" id="profile-toggle" aria-haspopup="true" aria-expanded="false">
+                        <span class="profile-avatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                        <span class="profile-name">Account</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <div class="profile-menu" id="profile-dropdown">
+                        <div class="profile-menu-header">
+                            <div class="profile-avatar-large">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                </svg>
+                            </div>
+                            <div class="profile-info">
+                                <strong id="user-name-display">Account</strong>
+                                <span id="user-email-display"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-menu-divider"></div>
+                        
+                        <a href="pages/profile.html#profile" class="profile-menu-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>My Profile</span>
+                        </a>
+                        
+                        <a href="pages/profile.html#bookings" class="profile-menu-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>My Bookings</span>
+                        </a>
+                        
+                        <a href="pages/profile.html#settings" class="profile-menu-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6m5.66-13.66l-4.24 4.24m0 4.24l-4.24 4.24M1 12h6m6 0h6M4.34 4.34l4.24 4.24m0 4.24l4.24 4.24"></path>
+                            </svg>
+                            <span>Settings</span>
+                        </a>
+                        
+                        <div class="profile-menu-divider"></div>
+                        
+                        <a href="#" class="profile-menu-item danger" id="sign-out-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            <span>Sign Out</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Grow Something<br>Beautiful</h1>
+        
+        <p>
+          Handcrafted bouquets and floral designs for every occasion. 
+          From intimate celebrations to grand events, we bring nature's 
+          beauty to your special moments.
+        </p>
+        
+        <div class="hero__stats">
+          <div class="stat">
+            <strong>500+</strong>
+            <span>Happy Clients</span>
+          </div>
+          <div class="stat">
+            <strong>1000+</strong>
+            <span>Arrangements</span>
+          </div>
+        </div>
+        
+        <div class="hero__buttons">
+          <a href="#services" class="btn btn--primary">
+            <span>Browse Bouquets</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about__container">
+            
+            <!-- Image Column -->
+            <div class="about__image-column">
+                <div class="about__image-wrapper">
+                    <img src="images/homepage1.jpg" alt="About Bloom Florals" class="about__main-image">
+                    <div class="about__image-accent"></div>
+                </div>
+                
+                <!-- Stats Card -->
+                <div class="about__stats-card">
+                    <div class="stat-item">
+                        <strong>500+</strong>
+                        <span>Events Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>98%</strong>
+                        <span>Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Column -->
+            <div class="about__content">
+                <span class="section-badge">About Us</span>
+                <h2>Creating Memorable Floral Experiences</h2>
+                
+                <p class="lead-text">
+                    Bloom Florals is more than just flowers, we're storytellers, designers, 
+                    and creators of unforgettable moments.
+                </p>
+                
+                <p>
+                    Founded with a passion for natural beauty and artistic expression, 
+                    we specialize in crafting bespoke floral arrangements that transform 
+                    ordinary spaces into extraordinary experiences.
+                </p>
+                
+                <p>
+                    From intimate pop-ups to grand celebrations, every arrangement is 
+                    thoughtfully designed to reflect your unique vision and style. 
+                    We believe flowers have the power to evoke emotion, tell stories, 
+                    and create lasting memories.
+                </p>
+
+                <!-- CTA Button -->
+                <div class="about__cta">
+                    <a href="#services" class="btn btn--primary">
+                        <span>Explore Our Services</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="bookings" id="services">
+      <div class="bookings__container">
+        
+        <!-- Section Header -->
+        <div class="bookings__header">
+          <span class="section-badge">Our Services</span>
+          <h2 class="section-title">Choose Your Perfect Experience</h2>
+          <p class="section-description">
+            From intimate pop-ups to grand events, we create unforgettable floral experiences
+            tailored to your vision
+          </p>
+        </div>
+
+        <!-- Booking Cards Grid -->
+        <div class="booking-cards">
+          
+          <!-- Popup Booking -->
+          <div class="booking-card">
+            <div class="card-image-wrapper">
+              <img src="images/popup.jpg" alt="Popup Booking">
+              <div class="card-overlay">
+                <span class="card-tag">Most Popular</span>
+              </div>
+            </div>
+            
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h3>Popup Booking</h3>
+              </div>
+              
+              <p class="card-description">
+                Perfect for short-term pop-ups, brand activations, and temporary setups
+                in high-traffic locations
+              </p>
+              
+              <ul class="card-features">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Flexible duration
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Custom arrangements
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Setup & breakdown
+                </li>
+              </ul>
+              
+              <a href="pages/booking.html" class="book-btn" data-requires-auth="true">
+                <span>Book Now</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Event Booking -->
+          <div class="booking-card featured">
+            <div class="card-image-wrapper">
+              <img src="images/event.jpg" alt="Event Booking">
+              <div class="card-overlay">
+                <span class="card-tag featured">Premium</span>
+              </div>
+            </div>
+            
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <h3>Event Booking</h3>
+              </div>
+              
+              <p class="card-description">
+                Ideal for private events, launches, celebrations, and customized
+                experiences that wow
+              </p>
+              
+              <ul class="card-features">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Premium packages
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Flower selection
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Full-service setup
+                </li>
+              </ul>
+              
+              <a href="pages/event-packages.html" class="book-btn" data-requires-auth="true">
+                <span>View Packages</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Workshop Booking -->
+          <div class="booking-card">
+            <div class="card-image-wrapper">
+              <img src="images/seminar.jpg" alt="Workshop Booking">
+              <div class="card-overlay">
+                <span class="card-tag">Educational</span>
+              </div>
+            </div>
+            
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <h3>Workshop Booking</h3>
+              </div>
+              
+              <p class="card-description">
+                Designed for workshops, floral classes, and educational gatherings with
+                complete facilities
+              </p>
+              
+              <ul class="card-features">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Large capacity
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Learning materials
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Expert instructors
+                </li>
+              </ul>
+              
+              <a href="pages/seminar.html" class="book-btn" data-requires-auth="true">
+                <span>Explore Workshops</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="bookings__cta">
+          <p>Not sure which option fits your needs?</p>
+          <a href="pages/inquiry.html" class="cta-link">Contact us for personalized recommendations.</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <div class="gallery__container">
+        <h2 class="section__title">Our Work</h2>
+        <p class="section__subtitle">
+          Popup events, workshops, and special occasions we've been part of.
+        </p>
+
+        <div class="gallery__grid">
+          <img src="images/popup1.jpg" alt="Popup Booking" loading="lazy" width="1536" height="2048">
+          <img src="images/event1.jpg" alt="Event Booking" loading="lazy" width="1536" height="2730">
+          <img src="images/seminar1.jpg" alt="Workshop Booking" loading="lazy" width="2048" height="1536">
+          <img src="images/popup2.jpg" alt="Popup Booking" loading="lazy" width="1536" height="2048">
+          <img src="images/event2.jpg" alt="Event Booking" loading="lazy" width="1536" height="2048">
+          <img src="images/seminar2.jpg" alt="Workshop Booking" loading="lazy" width="1536" height="2048">
+        </div>
+      </div>
+    </section>
+
+    <section class="flower-gallery fade-up" id="flower-gallery">
+      <div class="flower-gallery__container">
+        <div class="flower-gallery__header">
+          <span class="section-badge">Flower Gallery</span>
+          <h2>Quick Flower Preview</h2>
+          <p>
+            A simple preview of the flowers in our current catalog, so customers can recognize the
+            blooms they may see in our arrangements before booking.
+          </p>
+        </div>
+
+        <div class="flower-gallery__summary">
+          <article class="flower-metric">
+            <strong id="flowerGalleryCount">0</strong>
+            <span>Available flowers</span>
+          </article>
+          <article class="flower-metric">
+            <strong id="flowerGalleryMainCount">0</strong>
+            <span>Main flowers</span>
+          </article>
+          <article class="flower-metric">
+            <strong id="flowerGalleryFillerCount">0</strong>
+            <span>Filler flowers</span>
+          </article>
+        </div>
+
+        <div class="flower-gallery__groups">
+          <section class="flower-gallery__group">
+            <div class="flower-gallery__group-head">
+              <h3>Main Flowers</h3>
+              <span id="flowerGalleryMainMeta">Preview</span>
+            </div>
+            <div class="flower-gallery__cards" id="flowerGalleryMain"></div>
+          </section>
+
+          <section class="flower-gallery__group">
+            <div class="flower-gallery__group-head">
+              <h3>Filler Flowers</h3>
+              <span id="flowerGalleryFillerMeta">Preview</span>
+            </div>
+            <div class="flower-gallery__cards" id="flowerGalleryFiller"></div>
+          </section>
+        </div>
+
+        <div class="flower-gallery__actions" id="flowerGalleryActions">
+          <p class="flower-gallery__note">
+            Need the full catalog? Open the flower guide for all active flowers with larger photos
+            and simple search tools.
+          </p>
+          <a href="pages/flower-guide.html" class="flower-gallery__link">
+            <span>View Full Flower Guide</span>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="flower-gallery__empty" id="flowerGalleryEmpty" hidden>
+          Flower selections will appear here once the catalog is updated.
+        </p>
+      </div>
+    </section>
+
+    <section class="why-choose-us">
+      <div class="why-container">
+        
+        <h2>Why Choose Bloom Florals</h2>
+        <p class="why-subtitle">
+          We don't just arrange flowers, we create experiences that leave lasting impressions.
+        </p>
+
+        <div class="why-grid">
+          <div class="why-card">
+            <h3>Premium Fresh Florals</h3>
+            <p>Carefully sourced flowers to ensure beauty, freshness, and longevity.</p>
+          </div>
+
+          <div class="why-card">
+            <h3>Customized Designs</h3>
+            <p>Every arrangement is tailored to match your events theme and vision.</p>
+          </div>
+
+          <div class="why-card">
+            <h3>Reliable and On-Time Setup</h3>
+            <p>We value your time and guarantee seamless, punctual setups.</p>
+          </div>
+
+          <div class="why-card">
+            <h3>Passionate and Professional Team</h3>
+            <p>A dedicated team committed to excellence and attention to detail.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer fade-up">
+      <div class="footer__container">
+
+        <!-- Brand -->
+        <div class="footer__brand">
+          <img src="images/logo.png" alt="Bloom Florals Logo" class="footer__logo">
+          <p>
+            Bloom Florals creates thoughtful floral experiences for pop-ups,
+            events, and workshops &mdash; designed to leave a lasting impression.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer__links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#flower-gallery">Flower Gallery</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer__links">
+          <h4>Bookings</h4>
+          <ul>
+            <li>Pop-Up Bookings</li>
+            <li>Event Styling</li>
+            <li>Workshops</li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer__contact">
+          <h4>Get in Touch</h4>
+          <p>Email: hello@bloomflorals.com</p>
+          <p>Instagram: @bloomflorals</p>
+
+          <div class="footer__socials" aria-label="Bloom Florals social media links">
+            <a href="https://www.facebook.com/bloomflorals" class="footer__social-link" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/bloomflorals" class="footer__social-link" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@bloomflorals" class="footer__social-link" target="_blank" rel="noopener noreferrer">TikTok</a>
+          </div>
+
+          <a href="pages/inquiry.html" class="footer__cta">Ask a Question</a>
+        </div>
+
+      </div>
+
+      <!-- Bottom -->
+      <div class="footer__bottom">
+        <p>&copy; 2026 Bloom Florals. All rights reserved.</p>
+      </div>
+    </footer>
+
+
+    <script type="module" src="js/dialogs.js"></script>
+    <script src="js/app.js"></script>
+    <script type="module" src="js/nav-auth.js"></script>
+    <script type="module" src="js/home-flower-gallery.js"></script>
+
+</body>
+</html>
+
+
+

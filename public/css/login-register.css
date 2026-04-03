@@ -1,0 +1,620 @@
+/* ===================================================================
+   LOGIN & REGISTER PAGE STYLES
+   ===================================================================
+   TABLE OF CONTENTS:
+   1. CSS Variables & Reset
+   2. Body & Background
+   3. Container & Brand
+   4. Form Elements
+   5. Input Groups
+   6. Buttons
+   7. Message Notifications
+   8. Social Icons
+   9. Links & Dividers
+   10. Responsive Design
+   =================================================================== */
+
+
+/* ===================================================================
+   1. CSS VARIABLES & RESET
+   =================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue-primary: #2F80ED;
+    --blue-secondary: #56CCF2;
+    --blue-light: #EEF4FF;
+    --blue-lighter: #F6F9FF;
+    
+    --text-dark: #1f2937;
+    --text-gray: #4b5563;
+    --text-light: #6b7280;
+    --text-lighter: #9ca3af;
+    
+    --surface-white: #ffffff;
+    --surface-gray: #f9fafb;
+    
+    --shadow-sm: 0 4px 12px rgba(47, 128, 237, 0.08);
+    --shadow-md: 0 10px 30px rgba(47, 128, 237, 0.15);
+    --shadow-lg: 0 20px 50px rgba(47, 128, 237, 0.25);
+    
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 50px;
+}
+
+
+/* ===================================================================
+   2. BODY & BACKGROUND
+   =================================================================== */
+body {
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(47, 128, 237, 0.05) 0%,
+            rgba(86, 204, 242, 0.08) 50%,
+            rgba(47, 128, 237, 0.05) 100%
+        ),
+        linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative Background Elements */
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+body::before {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(86, 204, 242, 0.15), transparent 70%);
+    top: -150px;
+    right: -100px;
+}
+
+body::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(47, 128, 237, 0.12), transparent 70%);
+    bottom: -100px;
+    left: -80px;
+}
+
+
+/* ===================================================================
+   3. CONTAINER & BRAND
+   =================================================================== */
+.back-link {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.95rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(47, 128, 237, 0.18);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.back-link:hover {
+    color: var(--blue-primary);
+    border-color: rgba(47, 128, 237, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(47, 128, 237, 0.18);
+}
+
+.back-link:focus-visible {
+    outline: 3px solid rgba(47, 128, 237, 0.3);
+    outline-offset: 2px;
+}
+
+.container {
+    background: var(--surface-white);
+    width: 100%;
+    max-width: 460px;
+    padding: 2.5rem 2.5rem 3rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(47, 128, 237, 0.08);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Brand Logo */
+.brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.brand__logo {
+    height: 52px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.brand__logo:hover {
+    transform: scale(1.05);
+}
+
+
+/* ===================================================================
+   4. FORM ELEMENTS
+   =================================================================== */
+form {
+    margin: 0;
+}
+
+.form-title {
+    font-family: "Playfair Display", serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* ===================================================================
+   5. INPUT GROUPS
+   =================================================================== */
+.input-group {
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+
+.input-group--password input {
+    padding-right: 3rem;
+}
+
+.input-group > i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--blue-primary);
+    font-size: 1rem;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+input {
+    color: var(--text-dark);
+    width: 100%;
+    background-color: var(--blue-lighter);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem 1rem 3rem;
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    background-color: var(--surface-white);
+    border-color: var(--blue-primary);
+    box-shadow: 0 0 0 4px rgba(47, 128, 237, 0.1);
+}
+
+input:focus ~ i {
+    color: var(--blue-secondary);
+}
+
+input::placeholder {
+    color: var(--text-lighter);
+}
+
+label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    overflow: visible;
+    box-shadow: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.password-toggle::before {
+    display: none;
+}
+
+.password-toggle i {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    color: inherit;
+    font-size: 1rem;
+    z-index: auto;
+    pointer-events: none;
+}
+
+.password-toggle:hover {
+    transform: translateY(-50%);
+    color: var(--blue-primary);
+    background: rgba(47, 128, 237, 0.1);
+    box-shadow: none;
+}
+
+.password-toggle:active {
+    transform: translateY(-50%);
+    box-shadow: none;
+}
+
+.password-toggle:focus-visible {
+    outline: 3px solid rgba(47, 128, 237, 0.25);
+    outline-offset: 1px;
+}
+
+
+/* ===================================================================
+   6. BUTTONS
+   =================================================================== */
+button {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-full);
+    outline: none;
+    border: none;
+    width: 100%;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    box-shadow: 0 12px 30px rgba(47, 128, 237, 0.35);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(47, 128, 237, 0.45);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(47, 128, 237, 0.35);
+}
+
+
+
+/* ===================================================================
+   7. MESSAGE NOTIFICATIONS
+   =================================================================== */
+.messageDiv {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Success Message */
+.messageDiv.success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+/* Error Message */
+.messageDiv.error {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+/* Info Message - Default */
+.messageDiv {
+    background: linear-gradient(135deg, rgba(47, 128, 237, 0.1), rgba(86, 204, 242, 0.15));
+    color: var(--blue-primary);
+    border: 1px solid rgba(47, 128, 237, 0.3);
+}
+
+
+/* ===================================================================
+   8. SOCIAL ICONS
+   =================================================================== */
+.or {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    margin: 1.75rem 0 1.25rem;
+    text-align: center;
+    color: var(--text-lighter);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.or::before,
+.or::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, rgba(47, 128, 237, 0.3), transparent);
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+button.social-btn {
+    color: var(--blue-primary);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+    cursor: pointer;
+    border: 2px solid rgba(47, 128, 237, 0.2);
+    background: var(--blue-lighter);
+    transition: all 0.3s ease;
+    padding: 0;
+    box-shadow: none;
+    transform: none;
+}
+
+button.social-btn::before {
+    display: none;
+}
+
+button.social-btn:hover {
+    background: linear-gradient(135deg, rgba(47, 128, 237, 0.15), rgba(86, 204, 242, 0.2));
+    border-color: var(--blue-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(47, 128, 237, 0.2);
+}
+
+button.social-btn:active {
+    transform: translateY(-1px);
+}
+
+button.social-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* ===================================================================
+   9. LINKS & DIVIDERS
+   =================================================================== */
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+}
+
+.links p {
+    margin: 0;
+}
+
+#signUpButton,
+#signInButton {
+    color: var(--blue-primary);
+    border: none;
+    background: transparent !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0 !important;
+    width: auto !important;
+    box-shadow: none !important;
+    transition: color 0.2s ease;
+    display: inline;
+}
+
+#signUpButton:hover,
+#signInButton:hover {
+    color: var(--blue-secondary);
+    text-decoration: underline;
+    transform: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+#signUpButton::before,
+#signInButton::before {
+    display: none !important;
+}
+
+
+/* ===================================================================
+   10. RESPONSIVE DESIGN
+   =================================================================== */
+@media (max-width: 520px) {
+    body {
+        padding: 1.5rem 1rem;
+    }
+
+    body::before,
+    body::after {
+        opacity: 0.3;
+    }
+
+    .container {
+        padding: 2rem 1.75rem 2.5rem;
+        max-width: 100%;
+    }
+
+    .back-link {
+        top: 16px;
+        left: 16px;
+        font-size: 0.85rem;
+    }
+
+    .brand__logo {
+        height: 44px;
+    }
+
+    .form-title {
+        font-size: 1.85rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+        margin-bottom: 1rem;
+    }
+
+    input {
+        padding: 0.9rem 1rem 0.9rem 2.75rem;
+        font-size: 0.9rem;
+    }
+
+    .input-group i {
+        left: 14px;
+        font-size: 0.95rem;
+    }
+
+    label {
+        left: 2.75rem;
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 0.95rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .links {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    button.social-btn {
+        width: 46px;
+        height: 46px;
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .container {
+        padding: 1.75rem 1.5rem 2.25rem;
+    }
+
+    .form-title {
+        font-size: 1.65rem;
+    }
+
+    input {
+        padding: 0.85rem 0.9rem 0.85rem 2.5rem;
+    }
+
+    .input-group i {
+        left: 12px;
+    }
+
+    label {
+        left: 2.5rem;
+    }
+}

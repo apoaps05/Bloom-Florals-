@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Booking</title>
+  <link rel="stylesheet" href="../css/booking.css" />
+  <link rel="stylesheet" href="../css/selects.css" />
+  <link rel="stylesheet" href="../css/dialogs.css" />
+</head>
+<body>
+    <main class="page-wrapper">
+        <section class="booking-container fade-up">
+            <a class="back-link" href="event-packages.html">Back to Packages</a>
+            <h1>Event Booking</h1>
+            <p class="subtitle">Review your package and complete the booking details</p>
+
+            <p class="hint" id="packageError" hidden></p>
+
+            <!-- Core Booking Details (read-only) -->
+            <div class="card">
+                <h2>Core Booking Details</h2>
+                <div class="readonly-grid">
+                    <div><strong>Name:</strong> <span id="display-name"></span></div>
+                    <div><strong>Email:</strong> <span id="display-email"></span></div>
+                    <div><strong>Account ID:</strong> <span id="display-uid"></span></div>
+                </div>
+            </div>
+
+            <!-- Booking Type -->
+            <div class="card">
+                <h2>Type of Booking</h2>
+                <p class="subtitle">Selected from the homepage</p>
+                <div class="readonly-grid">
+                    <div><strong>Type:</strong> <span id="display-booking-type"></span></div>
+                </div>
+            </div>
+
+            <div class="card event-package-card" id="eventPackageCard" style="display: none;">
+                <div class="event-package-header">
+                    <div>
+                        <h2>Selected Event Package</h2>
+                        <p class="subtitle">Pulled from the package list</p>
+                    </div>
+                    <span class="package-pill">Event</span>
+                </div>
+                <div class="readonly-grid">
+                    <div><strong>Package:</strong> <span id="display-package-name"></span></div>
+                    <div><strong>Price:</strong> <span id="display-package-price"></span></div>
+                    <div><strong>Guests:</strong> <span id="display-package-pax"></span></div>
+                    <div><strong>Inclusions:</strong> <span id="display-package-flowers"></span></div>
+                </div>
+            </div>
+
+            <!-- Date & Time -->
+            <div class="card">
+                    <h2>Date & Time</h2>
+
+                    <label>Choose a Date</label>
+                    <input type="date" id="bookingDate" />
+            </div>
+            
+            <div class="card">
+                <h2>Preferred Time Range</h2>
+                <div class="time-range">
+                    <div class="time-field">
+                        <label for="startTime">Start Time</label>
+                        <select id="startTime"></select>
+                    </div>
+
+                    <div class="time-field">
+                        <label for="endTime">End Time</label>
+                        <select id="endTime"></select>
+                    </div>
+                </div>
+                <small class="hint">Please include setup and breakdown time if applicable</small>
+            </div>
+
+            <!-- Location -->
+            <div class="card">
+            <h2>Location Details</h2>
+            <p class="subtitle">Where will the service take place?</p>
+
+            <!-- Location Type -->
+            <div class="booking-type">
+                <button type="button" class="type-btn active" data-location="house">
+                Private Residence
+                </button>
+                <button type="button" class="type-btn" data-location="venue">
+                Event Venue
+                </button>
+            </div>
+
+            <!-- ===================== -->
+            <!-- House / Residence -->
+            <!-- ===================== -->
+            <div class="location-group" id="houseLocation">
+
+                <label>Province</label>
+                <select id="province">
+                <option value="">Select Province</option>
+                <!-- JS will populate (Luzon only) -->
+                </select>
+
+                <label>City / Municipality</label>
+                <select id="city">
+                <option value="">Select City</option>
+                </select>
+
+                <label>Barangay</label>
+                <input type="text" id="houseBarangay" placeholder="Enter barangay" />
+
+                <label>Street / Subdivision</label>
+                <input type="text" id="houseStreet" placeholder="Enter street or subdivision" />
+
+                <label>House / Unit No.</label>
+                <input type="text" id="houseUnit" placeholder="Enter house or unit number" />
+
+                <label>Landmark (optional)</label>
+                <input type="text" id="houseLandmark" placeholder="Nearest landmark" />
+
+                <label>Postal Code (optional)</label>
+                <input type="text" id="housePostalCode" placeholder="Enter postal code" />
+
+            </div>
+
+            <!-- ===================== -->
+            <!-- Event Venue -->
+            <!-- ===================== -->
+            <div class="location-group" id="venueLocation" style="display: none;">
+
+                <label>Venue Name</label>
+                <input type="text" id="venueName" placeholder="Enter venue name" />
+
+                <label>Province</label>
+                <select id="venueProvince">
+                <option value="">Select Province</option>
+                </select>
+
+                <label>City / Municipality</label>
+                <select id="venueCity">
+                <option value="">Select City</option>
+                </select>
+
+                <label>Barangay (optional)</label>
+                <input type="text" id="venueBarangay" placeholder="Enter barangay" />
+
+                <label>Full Address / Notes (optional)</label>
+                <textarea id="venueNotes" placeholder="Full address or additional notes"></textarea>
+
+            </div>
+            </div>
+
+            <!-- Special Requests -->
+            <div class="card">
+                <h2>Special Requests</h2>
+                <textarea id="specialRequests" placeholder="Share any special requests"></textarea>
+            </div>
+
+            <div class="card" id="eventFlowersCard" style="display: none;">
+                <h2>Choose Flowers</h2>
+                <p class="subtitle">Select exactly the number required by your package</p>
+                <div class="flower-limit" id="flowerLimitText"></div>
+                <div class="flower-group">
+                    <h3>Main Flowers</h3>
+                    <div class="flower-options" id="eventMainFlowerOptions"></div>
+                    <p class="hint" id="eventMainFlowerEmpty" hidden>No main flowers available for this package.</p>
+                </div>
+                <div class="flower-group">
+                    <h3>Fillers</h3>
+                    <div class="flower-options" id="eventFillerFlowerOptions"></div>
+                    <p class="hint" id="eventFillerFlowerEmpty" hidden>No fillers available for this package.</p>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button class="submit-btn" id="submitBtn">Proceed to Confirmation</button>
+        </section>
+    </main>
+  <script src="../js/custom-selects.js" defer></script>
+  <script type="module" src="../js/dialogs.js"></script>
+  <script type="module" src="../js/event-booking.js"></script>
+</body>
+</html>
+
+

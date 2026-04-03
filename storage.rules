@@ -1,0 +1,69 @@
+  rules_version = '2';
+  service firebase.storage {
+    match /b/{bucket}/o {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function hasUserRole(role) {
+        return isSignedIn()
+          && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+          && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == role;
+      }
+
+      function isAdmin() {
+        return isSignedIn()
+          && (
+            firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid))
+            || hasUserRole('admin')
+          );
+      }
+
+      function isEmployee() {
+        return hasUserRole('employee');
+      }
+
+      function isStaff() {
+        return isAdmin() || isEmployee();
+      }
+
+      function isAllowedFile() {
+        return request.resource != null
+          && request.resource.size < 5 * 1024 * 1024
+          && (
+            request.resource.contentType.matches('image/.*')
+            || request.resource.contentType == 'application/pdf'
+          );
+      }
+
+      function isBookingOwner(bookingId) {
+        return isSignedIn()
+          && firestore.exists(/databases/(default)/documents/bookings/$(bookingId))
+          && firestore.get(/databases/(default)/documents/bookings/$(bookingId)).data.userId == request.auth.uid;
+      }
+
+      match /seminars/{seminarId}/{fileName} {
+        allow read: if true;
+        allow write: if isAdmin() && isAllowedFile();
+      }
+
+      match /flowers/{flowerId}/{fileName} {
+        allow read: if true;
+        allow write: if isAdmin() && isAllowedFile();
+      }
+
+      match /event-payments/{bookingId}/{fileName} {
+        allow read: if isStaff() || isBookingOwner(bookingId);
+        allow write: if isBookingOwner(bookingId) && isAllowedFile();
+      }
+
+      match /seminar-payments/{bookingId}/{fileName} {
+        allow read: if isStaff() || isBookingOwner(bookingId);
+        allow write: if isBookingOwner(bookingId) && isAllowedFile();
+      }
+
+      match /{allPaths=**} {
+        allow read, write: if false;
+      }
+    }
+  }

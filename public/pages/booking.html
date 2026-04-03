@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Popup Booking</title>
+  <link rel="stylesheet" href="../css/booking.css" />
+  <link rel="stylesheet" href="../css/selects.css" />
+  <link rel="stylesheet" href="../css/dialogs.css" />
+</head>
+<body>
+    <main class="page-wrapper">
+        <section class="booking-container fade-up">
+            <a class="back-link" href="../index.html">Back to Homepage</a>
+            <h1>Popup Booking Request</h1>
+            <p class="subtitle">You're logged in &mdash; just complete the booking details</p>
+            <!-- Core Booking Details (read-only) -->
+            <div class="card">
+                <h2>Core Booking Details</h2>
+                <div class="readonly-grid">
+                    <div><strong>Name:</strong> <span id="display-name"></span></div>
+                    <div><strong>Email:</strong> <span id="display-email"></span></div>
+                    <div><strong>Account ID:</strong> <span id="display-uid"></span></div>
+                </div>
+            </div>
+
+            <!-- Booking Type -->
+            <div class="card">
+                <h2>Type of Booking</h2>
+                <p class="subtitle">Selected from the homepage</p>
+                <div class="readonly-grid">
+                    <div><strong>Type:</strong> <span id="display-booking-type"></span></div>
+                </div>
+            </div>
+
+            <!-- Date & Time -->
+            <div class="card">
+                    <h2>Date & Time</h2>
+
+                    <label>Choose a Date</label>
+                    <input type="date" id="bookingDate" />
+            </div>
+            
+            <div class="card">
+                <h2>Preferred Time Range</h2>
+                <div class="time-range">
+                    <div class="time-field">
+                        <label for="startTime">Start Time</label>
+                        <select id="startTime"></select>
+                    </div>
+
+                    <div class="time-field">
+                        <label for="endTime">End Time</label>
+                        <select id="endTime"></select>
+                    </div>
+                </div>
+                
+                <small class="hint">Please include setup and breakdown time if applicable</small>
+            </div>
+
+
+            <!-- Location -->
+            <div class="card">
+            <h2>Location Details</h2>
+            <p class="subtitle">Where will the service take place?</p>
+
+            <!-- Location Type -->
+            <div class="booking-type">
+                <button type="button" class="type-btn active" data-location="house">
+                Private Residence
+                </button>
+                <button type="button" class="type-btn" data-location="venue">
+                Event Venue
+                </button>
+            </div>
+
+            <!-- ===================== -->
+            <!-- House / Residence -->
+            <!-- ===================== -->
+            <div class="location-group" id="houseLocation">
+
+                <label>Province</label>
+                <select id="province">
+                <option value="">Select Province</option>
+                <!-- JS will populate (Luzon only) -->
+                </select>
+
+                <label>City / Municipality</label>
+                <select id="city">
+                <option value="">Select City</option>
+                </select>
+
+                <label>Barangay</label>
+                <input type="text" id="houseBarangay" placeholder="Enter barangay" />
+
+                <label>Street / Subdivision</label>
+                <input type="text" id="houseStreet" placeholder="Enter street or subdivision" />
+
+                <label>House / Unit No.</label>
+                <input type="text" id="houseUnit" placeholder="Enter house or unit number" />
+
+                <label>Landmark (optional)</label>
+                <input type="text" id="houseLandmark" placeholder="Nearest landmark" />
+
+                <label>Postal Code (optional)</label>
+                <input type="text" id="housePostalCode" placeholder="Enter postal code" />
+
+            </div>
+
+            <!-- ===================== -->
+            <!-- Event Venue -->
+            <!-- ===================== -->
+            <div class="location-group" id="venueLocation" style="display: none;">
+
+                <label>Venue Name</label>
+                <input type="text" id="venueName" placeholder="Enter venue name" />
+
+                <label>Province</label>
+                <select id="venueProvince">
+                <option value="">Select Province</option>
+                </select>
+
+                <label>City / Municipality</label>
+                <select id="venueCity">
+                <option value="">Select City</option>
+                </select>
+
+                <label>Barangay (optional)</label>
+                <input type="text" id="venueBarangay" placeholder="Enter barangay" />
+
+                <label>Full Address / Notes (optional)</label>
+                <textarea id="venueNotes" placeholder="Full address or additional notes"></textarea>
+
+            </div>
+            </div>
+
+            <!-- Special Requests -->
+            <div class="card">
+                <h2>Special Requests</h2>
+                <textarea id="specialRequests" placeholder="Share any special requests"></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button class="submit-btn" id="submitBtn">Send Collaboration Request</button>
+        </section>
+    </main>
+  <script src="../js/custom-selects.js" defer></script>
+  <script type="module" src="../js/dialogs.js"></script>
+  <script type="module" src="../js/booking.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flower Guide | Bloom Florals</title>
+  <link rel="stylesheet" href="../css/flower-guide.css" />
+</head>
+<body>
+  <main class="page-wrapper">
+    <section class="guide-container">
+      <a class="back-link" href="../index.html#flower-gallery">Back to Homepage</a>
+
+      <header class="guide-header">
+        <div class="guide-header__content">
+          <span class="guide-badge">Flower Guide</span>
+          <h1>Know the flowers before you book</h1>
+          <p class="subtitle">
+            Browse the current catalog by photo so customers can quickly recognize the blooms used
+            in our arrangements without getting overwhelmed.
+          </p>
+        </div>
+
+        <aside class="guide-note">
+          <strong>Simple note</strong>
+          <p>Availability may still vary by package, season, and stock at the time of booking.</p>
+        </aside>
+      </header>
+
+      <section class="guide-summary" aria-label="Flower catalog summary">
+        <article class="guide-metric">
+          <strong id="flowerGuideCount">0</strong>
+          <span>Active flowers</span>
+        </article>
+        <article class="guide-metric">
+          <strong id="flowerGuideMainCount">0</strong>
+          <span>Main flowers</span>
+        </article>
+        <article class="guide-metric">
+          <strong id="flowerGuideFillerCount">0</strong>
+          <span>Filler flowers</span>
+        </article>
+        <article class="guide-metric guide-metric--accent">
+          <strong id="flowerGuideVisibleCount">0</strong>
+          <span>Visible results</span>
+        </article>
+      </section>
+
+      <section class="guide-toolbar" aria-label="Flower guide controls">
+        <div class="guide-toolbar__row">
+          <label class="guide-field guide-search" for="flowerGuideSearch">
+            <span>Search flower name</span>
+            <input
+              id="flowerGuideSearch"
+              type="search"
+              placeholder="Try rose, sampaguita, baby's breath"
+              autocomplete="off"
+            />
+          </label>
+
+          <div class="guide-field">
+            <span>Filter by type</span>
+            <div class="guide-filters" aria-label="Flower type filters">
+              <button type="button" class="guide-filter is-active" data-filter="all" aria-pressed="true">All</button>
+              <button type="button" class="guide-filter" data-filter="main" aria-pressed="false">Main</button>
+              <button type="button" class="guide-filter" data-filter="filler" aria-pressed="false">Filler</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="guide-results" id="flowerGuideResultsText">Loading the current flower catalog...</p>
+      </section>
+
+      <section class="guide-grid-section">
+        <div class="flower-guide-grid" id="flowerGuideGrid"></div>
+        <p class="flower-guide-empty" id="flowerGuideEmpty" hidden>
+          No flowers matched your current search or filter.
+        </p>
+      </section>
+
+      <section class="guide-footer">
+        <div class="guide-footer__copy">
+          <h2>Ready to continue?</h2>
+          <p>Once you know the flowers you like, you can browse packages or send a custom inquiry.</p>
+        </div>
+        <div class="guide-footer__actions">
+          <a href="event-packages.html" class="guide-action guide-action--primary">Browse Event Packages</a>
+          <a href="inquiry.html" class="guide-action guide-action--secondary">Send an Inquiry</a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="../js/flower-guide.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workshop Booking</title>
+  <link rel="stylesheet" href="../css/seminar.css" />
+  <link rel="stylesheet" href="../css/dialogs.css" />
+</head>
+<body>
+
+<main class="page-wrapper">
+  <section class="booking-container fade-up">
+    <a class="back-link" href="../index.html">Back to Homepage</a>
+    <h1>Reserve Workshop Slot</h1>
+    <p class="subtitle">
+      You're logged in - review details and proceed to payment
+    </p>
+
+    <div class="card" id="invalidSeminar" hidden>
+      <h2>Workshop Unavailable</h2>
+      <p class="payment-note" id="invalidSeminarMessage">
+        This workshop is not available or has already passed. Please choose another date.
+      </p>
+      <a class="secondary-btn" href="seminar.html">Back to upcoming workshops</a>
+    </div>
+
+    <!-- ============================= -->
+    <!-- CORE USER DETAILS (READ-ONLY) -->
+    <!-- ============================= -->
+    <div class="card">
+      <h2>Your Account</h2>
+      <div class="readonly-grid">
+        <div><strong>Name:</strong> <span id="display-name"></span></div>
+        <div><strong>Email:</strong> <span id="display-email"></span></div>
+        <div><strong>User ID:</strong> <span id="display-uid"></span></div>
+      </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- SEMINAR DETAILS (OWNER SETS) -->
+    <!-- ============================= -->
+    <div class="card seminar-details">
+      <h2>Workshop Information</h2>
+
+      <p class="seminar-title"><strong>Title:</strong> <span id="seminarTitle" class="highlight"></span></p>
+      <p><strong>Date & Time:</strong> <span id="seminarDate"></span><span id="seminarTime"></span></p>
+      <p><strong>Location:</strong> <span id="seminarLocation"></span></p>
+      <p><strong>Price per attendee:</strong> <span id="seminarPrice"></span></p>
+      <p><strong>Slots left:</strong> <span id="seminarSlotsLeft"></span></p>
+      <p><strong>Total:</strong> <span id="seminarTotal"></span></p>
+      <p><strong>Description:</strong></p>
+
+      <p class="description" id="seminarDesc"></p>
+
+      <img
+        alt="Workshop Cover"
+        class="seminar-image"
+        id="seminarImage" hidden />
+
+      <a class="secondary-btn" href="seminar.html">
+        View other dates
+      </a>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ATTENDANCE -->
+    <!-- ============================= -->
+    <div class="card">
+      <h2>Attendance</h2>
+      <label for="slotCount">Number of Attendees</label>
+      <input type="number" id="slotCount" min="1" step="1" value="1" />
+      <p class="hint">Reserve multiple slots in one submission.</p>
+      <p class="hint" id="seminarAvailabilityNote"></p>
+    </div>
+
+    <div class="card" id="additionalAttendeesCard" hidden>
+      <h2>Additional Attendees</h2>
+      <p class="hint">Please provide details for each additional attendee.</p>
+      <div class="attendee-list" id="additionalAttendees"></div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- SUBMIT -->
+    <!-- ============================= -->
+    <button class="submit-btn" id="submitSeminar">
+      Continue to Payment
+    </button>
+
+  </section>
+</main>
+
+  <script type="module" src="../js/dialogs.js"></script>
+  <script type="module" src="../js/seminar.js"></script>
+</body>
+</html>
+
+

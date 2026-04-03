@@ -1,0 +1,480 @@
+﻿/* ===================================================================
+   PAYMENT PAGE STYLES
+   =================================================================== */
+
+/* Summary Card */
+.summary-card {
+  background: linear-gradient(
+    135deg,
+    rgba(47, 128, 237, 0.08),
+    rgba(86, 204, 242, 0.12)
+  );
+  border: 1px solid rgba(47, 128, 237, 0.2);
+}
+
+.summary-grid {
+  display: grid;
+  gap: 16px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 15px;
+  color: #1f2937;
+  font-weight: 600;
+  text-align: right;
+}
+
+.total-item {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 2px solid #2F80ED;
+  border-bottom: none;
+}
+
+.total-amount {
+  font-size: 24px;
+  color: #2F80ED;
+}
+
+/* Payment Instructions */
+.payment-instructions {
+  margin-top: 20px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.instruction-box {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.08),
+    rgba(251, 191, 36, 0.12)
+  );
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.instruction-box h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #92400e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.instruction-box h3::before {
+  content: "Info";
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.instruction-box ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.instruction-box li {
+  margin-bottom: 10px;
+  color: #78350f;
+  line-height: 1.6;
+}
+
+.instruction-box strong {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* File Upload */
+.file-upload-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.file-upload-wrapper input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-upload-display {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.file-upload-wrapper:hover .file-upload-display {
+  border-color: #2F80ED;
+  background: #eff6ff;
+}
+
+.file-upload-display svg {
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.file-upload-display p {
+  margin: 0 0 4px 0;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.file-upload-display small {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* File Preview */
+.file-preview {
+  position: relative;
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #2F80ED;
+}
+
+.file-preview img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  background: #f9fafb;
+}
+
+.remove-file {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.remove-file:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .summary-grid {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .summary-value {
+    text-align: left;
+  }
+
+  .total-amount {
+    font-size: 20px;
+  }
+
+  .instruction-box {
+    padding: 16px;
+  }
+
+  .instruction-box ol {
+    padding-left: 16px;
+  }
+}
+
+/* ===================================================================
+   TERMS & CONDITIONS STYLES
+   =================================================================== */
+
+.terms-card {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.05),
+    rgba(147, 197, 253, 0.08)
+  );
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.terms-content {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Scrollbar for terms content */
+.terms-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terms-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.terms-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.terms-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.terms-section {
+  margin-bottom: 24px;
+}
+
+.terms-section:last-child {
+  margin-bottom: 0;
+}
+
+.terms-section h3 {
+  font-size: 16px;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terms-section h3::before {
+  content: "*";
+  color: #2F80ED;
+  font-size: 20px;
+}
+
+.terms-section ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.terms-section li {
+  margin-bottom: 10px;
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 14px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.terms-section li::before {
+  content: ">";
+  position: absolute;
+  left: -8px;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+.terms-section li:last-child {
+  margin-bottom: 0;
+}
+
+.terms-section strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Warning Section */
+.warning-section {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.08),
+    rgba(251, 191, 36, 0.12)
+  );
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.warning-section h3 {
+  color: #92400e;
+}
+
+.warning-section li {
+  color: #78350f;
+}
+
+.warning-section li::before {
+  color: #f59e0b;
+}
+
+/* Terms Agreement Checkbox */
+.terms-agreement {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #2F80ED;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkbox-label span {
+  line-height: 1.5;
+}
+
+/* Submit button disabled state */
+.submit-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.submit-btn:disabled:hover {
+  transform: none;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .terms-content {
+    padding: 16px;
+    max-height: 300px;
+  }
+
+  .terms-section h3 {
+    font-size: 15px;
+  }
+
+  .terms-section li {
+    font-size: 13px;
+  }
+
+  .checkbox-label {
+    font-size: 13px;
+  }
+}
+
+/* Summary Header with Reference */
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.summary-header h2 {
+  margin: 0;
+}
+
+.booking-reference {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.ref-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.ref-number {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2F80ED;
+  background: rgba(47, 128, 237, 0.1);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(47, 128, 237, 0.2);
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  .summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .booking-reference {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .ref-number {
+    font-size: 14px;
+    padding: 5px 12px;
+  }
+}

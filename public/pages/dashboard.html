@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Requests | Bloom Admin</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/dialogs.css" />
+    <link rel="stylesheet" href="../css/analytics.css">
+    <link rel="stylesheet" href="../css/selects.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <div class="app-layout">
+            <aside class="sidebar">
+                <div class="sidebar-brand">
+                    <h2 class="sidebar-panel-title" id="staffRoleLabel">Admin Panel</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <button class="nav-link active" data-section="booking-calendar">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M8 2v4" />
+                            <path d="M16 2v4" />
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <path d="M3 10h18" />
+                        </svg>
+                        Booking Calendar
+                    </button>
+
+                    <button class="nav-link" data-section="dashboard" data-role-access="admin">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7" rx="2" />
+                            <rect x="14" y="3" width="7" height="7" rx="2" />
+                            <rect x="3" y="14" width="7" height="7" rx="2" />
+                            <rect x="14" y="14" width="7" height="7" rx="2" />
+                        </svg>
+                        Analytics
+                    </button>
+
+                    <div class="nav-section">
+                        <p class="nav-title">REQUESTS</p>
+
+                        <button class="nav-link" data-section="popup-requests">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M4 4h16v12H4z" />
+                                <path d="M22 6l-10 7L2 6" />
+                            </svg>
+                            Popup Invitations
+                            <span class="badge-count" id="badge-popup">0</span>
+                        </button>
+
+                        <button class="nav-link" data-section="event-requests">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M3 22V7l9-4 9 4v15" />
+                                <path d="M9 22V12h6v10" />
+                            </svg>
+                            Event Requests
+                            <span class="badge-count" id="badge-event">0</span>
+                        </button>
+
+                    <button class="nav-link" data-section="seminar-requests">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8 12h8" />
+                            <path d="M12 8v8" />
+                        </svg>
+                        Workshop Requests
+                        <span class="badge-count" id="badge-seminar">0</span>
+                    </button>
+
+                    <button class="nav-link" data-section="seminar-builder" data-role-access="admin">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                        </svg>
+                        Workshop Builder
+                    </button>
+
+                    <button class="nav-link" data-section="package-management" data-role-access="admin">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M21 8l-9 5-9-5 9-5 9 5z" />
+                            <path d="M3 8v8l9 5 9-5V8" />
+                        </svg>
+                            Event Packages
+                        </button>
+
+                        <button class="nav-link" data-section="flower-management" data-role-access="admin">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="3" />
+                                <path d="M12 2c2 1 3 3 3 5" />
+                                <path d="M12 2c-2 1-3 3-3 5" />
+                                <path d="M22 12c-1 2-3 3-5 3" />
+                                <path d="M22 12c-1-2-3-3-5-3" />
+                                <path d="M12 22c-2-1-3-3-3-5" />
+                                <path d="M12 22c2-1 3-3 3-5" />
+                                <path d="M2 12c1-2 3-3 5-3" />
+                                <path d="M2 12c1 2 3 3 5 3" />
+                            </svg>
+                            Flower Catalog
+                        </button>
+
+                        <button class="nav-link" data-section="history" data-role-access="admin">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
+                            History
+                        </button>
+
+                    </div>
+
+                </nav>
+
+                <button class="signout-btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <path d="M16 17l5-5-5-5" />
+                        <path d="M21 12H9" />
+                    </svg>
+                    Sign Out
+                </button>
+            </aside>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+
+            <!-- ================= DASHBOARD ================= -->
+            <section id="dashboard" class="request-section" data-role-access="admin">
+
+                <header class="header dashboard-header">
+                    <div>
+                        <h1>Analytics</h1>
+                        <span class="subtitle" id="dashboardWelcomeLabel">Welcome back, Admin</span>
+                    </div>
+                    <div class="header-actions">
+                        <select id="dashboardTimeRange" class="time-range-select">
+                            <option value="7">Last 7 days</option>
+                            <option value="30" selected>Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                            <option value="365">Last year</option>
+                            <option value="all">All time</option>
+                        </select>
+                    </div>
+                </header>
+
+                <!-- KPI Cards -->
+                <section class="kpi-grid">
+                    
+                    <div class="kpi-card primary">
+                        <div class="kpi-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 11H15M9 15H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H12.5858C12.851 3 13.1054 3.10536 13.2929 3.29289L18.7071 8.70711C18.8946 8.89464 19 9.149 19 9.41421V19C19 20.1046 18.1046 21 17 21Z" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <div class="kpi-label">Total Bookings</div>
+                            <div class="kpi-value" id="stat-total">0</div>
+                            <div class="kpi-meta" id="stat-total-change">
+                                <span class="trend positive">&#9650; 0%</span>
+                                <span class="period">vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card success">
+                        <div class="kpi-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <div class="kpi-label">This Month</div>
+                            <div class="kpi-value" id="stat-month">0</div>
+                            <div class="kpi-meta">
+                                <span class="period">Current month bookings</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card info">
+                        <div class="kpi-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <div class="kpi-label">Active Events</div>
+                            <div class="kpi-value" id="stat-active">0</div>
+                            <div class="kpi-meta">
+                                <span class="period">Upcoming & ongoing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card danger">
+                        <div class="kpi-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <div class="kpi-label">Cancellation Rate</div>
+                            <div class="kpi-value" id="stat-cancel">0%</div>
+                            <div class="kpi-meta">
+                                <span class="period">Of total bookings</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card pending">
+                        <div class="kpi-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <div class="kpi-label">Pending Requests</div>
+                            <div class="kpi-value" id="stat-pending">0</div>
+                            <div class="kpi-meta">
+                                <span class="period">Awaiting approval</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Charts Grid -->
+                <div class="charts-grid">
+                    
+                    <!-- Booking Trend Chart -->
+                    <div class="chart-card full-width">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Booking Trends</h3>
+                                <span class="chart-subtitle">Bookings over time</span>
+                            </div>
+                            <div class="chart-filters">
+                                <select id="monthFilter" class="chart-select">
+                                    <option value="all">All Months</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                <select id="yearFilter" class="chart-select">
+                                    <option value="2027">2027</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="bookingTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Status Breakdown -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Status Breakdown</h3>
+                                <span class="chart-subtitle">Current booking states</span>
+                            </div>
+                        </div>
+                        <div class="chart-body doughnut-container">
+                            <canvas id="bookingStatusChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Booking Type Distribution -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Booking Types</h3>
+                                <span class="chart-subtitle">Distribution by type</span>
+                            </div>
+                        </div>
+                        <div class="chart-body doughnut-container">
+                            <canvas id="bookingTypeChart"></canvas>
+                        </div>
+                    </div>
+
+
+                    <!-- Top Events Table -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Top Events</h3>
+                                <span class="chart-subtitle">Best performing events</span>
+                            </div>
+                        </div>
+                        <div class="chart-body table-container">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Event Name</th>
+                                        <th>Bookings</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="topEventsTable">
+                                    <tr>
+                                        <td colspan="2" class="table-loading"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <h3>Recent Activity</h3>
+                        <span class="activity-subtitle">Latest booking updates</span>
+                    </div>
+                    <div class="activity-list" id="recentActivityList">
+                        <div class="activity-loading" hidden></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ================= POPUP REQUESTS ================= -->
+            <section id="popup-requests" class="request-section" hidden>
+
+                <!-- HEADER -->
+                <header class="header">
+                    <h1>Popup Invitations</h1>
+                    <span class="subtitle">
+                        Review and accept popup invitations (no payment required)
+                    </span>
+                </header>
+
+                <!-- SUMMARY ROW -->
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total Invitations</h3>
+                        <p id="popupTotalCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Active Requests</h3>
+                        <p id="popupActiveCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Pending</h3>
+                        <p id="popupPendingCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Completed</h3>
+                        <p id="popupAcceptedCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Declined</h3>
+                        <p id="popupDeclinedCount">0</p>
+                    </div>
+                </div>
+
+                <!-- LIST -->
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>Popup Invitations</h3>
+                        <span id="popupCountLabel">0 pending</span>
+                    </div>
+
+                    <!-- FILTER BAR -->
+                    <div class="filter-bar booking-filters popup-filters">
+
+                        <!-- SEARCH -->
+                        <div class="filter-group search">
+                            <svg class="filter-icon" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                            <input
+                                type="text"
+                                id="popupSearch"
+                                placeholder="Search by client, reference, title, or location"
+                            />
+                        </div>
+
+                        <!-- SORT -->
+                        <div class="filter-group">
+                            <label>Sort</label>
+                            <select id="popupSortFilter">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+
+                        <!-- DATE -->
+                        <div class="filter-group">
+                            <label>Date</label>
+                            <input type="date" id="popupDateFilter" />
+                        </div>
+
+                        <!-- ACTIONS -->
+                        <div class="filter-group actions">
+                            <button class="btn secondary" id="popupClearFilters">
+                                Clear Filters
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <section class="request-list scrollable" id="popupRequestList"></section>
+
+                </div>
+
+            </section>
+
+            <!-- ================= EVENT REQUESTS ================= -->
+
+            <section id="event-requests" class="request-section" hidden>
+
+                <!-- HEADER -->
+                <header class="header">
+                    <h1>Event Requests</h1>
+                    <span class="subtitle">
+                        Manage event bookings and payment progress
+                    </span>
+                </header>
+
+                <!-- SUMMARY ROW -->
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total Requests</h3>
+                        <p id="eventTotalCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Pending Approval</h3>
+                        <p id="eventPendingCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Awaiting Payment</h3>
+                        <p id="eventAwaitingCount">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>For Review</h3>
+                        <p id="eventReviewCount">0</p>
+                    </div>
+                </div>
+
+                <!-- LIST CONTAINER -->
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>Event Requests</h3>
+                        <span id="eventCountLabel">0 total</span>
+                    </div>
+
+                    <!-- FILTER BAR -->
+                    <div class="filter-bar booking-filters">
+
+                        <!-- SEARCH -->
+                        <div class="filter-group search">
+                            <svg class="filter-icon" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                            <input
+                                type="text"
+                                id="eventSearch"
+                                placeholder="Search by client, reference, package, or location"
+                            />
+                        </div>
+
+                        <!-- STATUS -->
+                        <div class="filter-group">
+                            <label>Status</label>
+                            <select id="eventStatusFilter">
+                                <option value="all">All</option>
+                                <option value="pending">Pending</option>
+                                <option value="awaiting_payment">Awaiting Payment</option>
+                                <option value="payment_submitted">Payment Submitted</option>
+                            </select>
+                        </div>
+
+                        <!-- SORT -->
+                        <div class="filter-group">
+                            <label>Sort</label>
+                            <select id="eventSortFilter">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+
+                        <!-- DATE -->
+                        <div class="filter-group">
+                            <label>Date</label>
+                            <input type="date" id="eventDateFilter" />
+                        </div>
+
+                        <!-- ACTIONS -->
+                        <div class="filter-group actions">
+                            <button class="btn secondary" id="eventClearFilters">
+                                Clear Filters
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <section class="request-list scrollable" id="eventRequestList"></section>
+                </div>
+
+            </section>
+
+            <!-- ================= SEMINAR REQUESTS ================= -->
+
+            <section id="seminar-builder" class="request-section" data-role-access="admin" hidden>
+
+                <header class="header with-actions">
+                    <div>
+                        <h1>Workshop Builder</h1>
+                        <span class="subtitle">
+                            Create and manage workshop listings shown to customers
+                        </span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn accept" id="openSeminarFormBtn">New Workshop</button>
+                    </div>
+                </header>
+
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>Workshop Catalog</h3>
+                        <span id="seminarCatalogCount">0 workshops</span>
+                    </div>
+
+                    <section class="seminar-catalog-list" id="seminarCatalogList"></section>
+
+                </div>
+            </section>
+
+            <section id="seminar-requests" class="request-section" hidden>
+
+                <header class="header">
+                    <h1>Workshop Requests</h1>
+                    <span class="subtitle">
+                        Review workshops and view applicants
+                    </span>
+                </header>
+
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>Active & Upcoming Workshops</h3>
+                        <span id="seminarCountLabel">0 workshops</span>
+                    </div>
+
+                    <!-- FILTER BAR -->
+                    <div class="filter-bar">
+
+                        <!-- SEARCH -->
+                        <div class="filter-group search">
+                            <svg class="filter-icon" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                            <input
+                                type="text"
+                                id="seminarSearch"
+                                placeholder="Search by workshop title, location, or details"
+                            />
+                        </div>
+
+                        <!-- STATUS -->
+                        <div class="filter-group">
+                            <label>Status</label>
+                            <select id="seminarStatusFilter">
+                                <option value="upcoming">Upcoming</option>
+                                <option value="past">Past</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+
+                        <!-- SORT -->
+                        <div class="filter-group">
+                            <label>Sort</label>
+                            <select id="seminarSortFilter">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+
+                        <!-- DATE -->
+                        <div class="filter-group">
+                            <label>Date</label>
+                            <input type="date" id="seminarDateFilter" />
+                        </div>
+
+                    </div>
+
+                    <section class="seminar-grid" id="seminarRequestList"></section>
+                </div>
+
+            </section>
+
+            <section id="booking-calendar" class="request-section" hidden>
+
+                <header class="header with-actions">
+                    <div>
+                        <h1>Booking Calendar</h1>
+                        <span class="subtitle">
+                            Start here to see the schedule, then open any day for the booking details
+                        </span>
+                    </div>
+                    <div class="header-actions calendar-actions">
+                        <div class="calendar-month-controls" aria-label="Choose calendar month and year">
+                            <div class="calendar-month-control calendar-dropdown" data-calendar-dropdown="month">
+                                <span class="calendar-month-control__label">Month</span>
+                                <button
+                                    type="button"
+                                    class="calendar-dropdown__trigger"
+                                    id="calendarMonthTrigger"
+                                    aria-haspopup="listbox"
+                                    aria-expanded="false"
+                                    aria-controls="calendarMonthMenu"
+                                >
+                                    <span class="calendar-dropdown__value" id="calendarMonthValue">Month</span>
+                                    <span class="calendar-dropdown__chevron" aria-hidden="true">
+                                        <svg class="calendar-dropdown__chevron-icon" viewBox="0 0 14 14" focusable="false">
+                                            <path d="M3 5.25L7 9.25L11 5.25" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <div
+                                    class="calendar-dropdown__menu"
+                                    id="calendarMonthMenu"
+                                    role="listbox"
+                                    aria-label="Choose month"
+                                    hidden
+                                ></div>
+                            </div>
+                            <div class="calendar-month-control calendar-dropdown" data-calendar-dropdown="year">
+                                <span class="calendar-month-control__label">Year</span>
+                                <button
+                                    type="button"
+                                    class="calendar-dropdown__trigger"
+                                    id="calendarYearTrigger"
+                                    aria-haspopup="listbox"
+                                    aria-expanded="false"
+                                    aria-controls="calendarYearMenu"
+                                >
+                                    <span class="calendar-dropdown__value" id="calendarYearValue">Year</span>
+                                    <span class="calendar-dropdown__chevron" aria-hidden="true">
+                                        <svg class="calendar-dropdown__chevron-icon" viewBox="0 0 14 14" focusable="false">
+                                            <path d="M3 5.25L7 9.25L11 5.25" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <div
+                                    class="calendar-dropdown__menu"
+                                    id="calendarYearMenu"
+                                    role="listbox"
+                                    aria-label="Choose year"
+                                    hidden
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="calendar-overview" aria-label="Schedule overview">
+                    <div class="calendar-overview__item calendar-overview__item--primary">
+                        <span class="calendar-overview__label">Selected Day</span>
+                        <strong class="calendar-overview__value" id="calendarSelectedDateLabel">No date selected</strong>
+                    </div>
+                    <div class="calendar-overview__item">
+                        <span class="calendar-overview__label">This Month</span>
+                        <strong class="calendar-overview__value" id="calendarMonthBookingCount">0</strong>
+                    </div>
+                    <div class="calendar-overview__item">
+                        <span class="calendar-overview__label">Today</span>
+                        <strong class="calendar-overview__value" id="calendarTodayCount">0</strong>
+                    </div>
+                    <div class="calendar-overview__item">
+                        <span class="calendar-overview__label">Next 7 Days</span>
+                        <strong class="calendar-overview__value" id="calendarUpcomingCount">0</strong>
+                    </div>
+                </div>
+
+                <div class="calendar-layout">
+                    <section class="request-list-container calendar-panel">
+                        <div class="filter-bar booking-filters calendar-filters">
+                            <div class="filter-group search">
+                                <svg class="filter-icon" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
+                                </svg>
+                                <input
+                                    type="text"
+                                    id="calendarSearch"
+                                    placeholder="Search by client, reference, title, or location"
+                                />
+                            </div>
+
+                            <div class="filter-group">
+                                <label>Type</label>
+                                <select id="calendarTypeFilter">
+                                    <option value="all">All Types</option>
+                                    <option value="popup">Popup</option>
+                                    <option value="event">Event</option>
+                                    <option value="seminar">Workshop</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label>Status</label>
+                                <select id="calendarStatusFilter">
+                                    <option value="all">All Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="awaiting_payment">Awaiting Payment</option>
+                                    <option value="payment_submitted">Payment Submitted</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="declined">Declined</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group actions">
+                                <button class="btn secondary" id="calendarPrevMonth" type="button">
+                                    Previous
+                                </button>
+                                <button class="btn secondary" id="calendarTodayBtn" type="button">
+                                    Today
+                                </button>
+                                <button class="btn secondary" id="calendarNextMonth" type="button">
+                                    Next
+                                </button>
+                                <button class="btn secondary" id="calendarClearFiltersBtn" type="button">
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="calendar-results-note" id="calendarResultsNote">
+                            Loading current schedule...
+                        </p>
+
+                        <div class="calendar-weekdays">
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                        </div>
+
+                        <div class="booking-calendar-grid" id="bookingCalendarGrid"></div>
+                    </section>
+
+                    <aside class="request-list-container calendar-detail-panel">
+                        <div class="list-header">
+                            <h3 id="calendarDayTitle">Select a day</h3>
+                            <span id="calendarDayCount">0 bookings</span>
+                        </div>
+
+                        <section class="calendar-day-list" id="calendarDayList"></section>
+                    </aside>
+                </div>
+
+            </section>
+
+            <!-- ================= PACKAGE MANAGEMENT ================= -->
+            <section id="package-management" class="request-section" data-role-access="admin" hidden>
+
+                <header class="header with-actions">
+                    <div>
+                        <h1>Event Packages</h1>
+                        <span class="subtitle">
+                            Add, edit, and remove event packages shown to customers
+                        </span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn accept" id="openPackageFormBtn">New Package</button>
+                    </div>
+                </header>
+
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>Package Builder</h3>
+                        <span id="packageCountLabel">0 packages</span>
+                    </div>
+
+                    <section class="package-list" id="packageList"></section>
+
+                </div>
+            </section>
+
+            <!-- ================= FLOWER MANAGEMENT ================= -->
+            <section id="flower-management" class="request-section" data-role-access="admin" hidden>
+
+                <header class="header with-actions">
+                    <div>
+                        <h1>Flower Catalog</h1>
+                        <span class="subtitle">
+                            Create and remove flowers available for event packages
+                        </span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn accept" id="openFlowerFormBtn">Add Flower</button>
+                    </div>
+                </header>
+
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>Flowers</h3>
+                        <span id="flowerCountLabel">0 flowers</span>
+                    </div>
+
+                    <div class="flower-catalog-grid">
+                        <div class="flower-column">
+                            <div class="flower-column-header">
+                                <h4>Main Flowers</h4>
+                                <span id="flowerMainCount">0</span>
+                            </div>
+                            <section class="package-list" id="flowerMainList"></section>
+                        </div>
+                        <div class="flower-column">
+                            <div class="flower-column-header">
+                                <h4>Filler Flowers</h4>
+                                <span id="flowerFillerCount">0</span>
+                            </div>
+                            <section class="package-list" id="flowerFillerList"></section>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ================= HISTORY ================= -->
+            <section id="history" class="request-section" data-role-access="admin" hidden>
+
+                <header class="header">
+                    <h1>Booking History</h1>
+                    <span class="subtitle">
+                        Complete record of all bookings and applications
+                    </span>
+                </header>
+
+                <!-- Summary Cards -->
+                <div class="cards">
+                    <div class="card kpi">
+                        <div class="card-label">Total Records</div>
+                        <div class="card-value" id="historyTotalCount">0</div>
+                        <div class="card-meta neutral">All time</div>
+                    </div>
+                    <div class="card kpi">
+                        <div class="card-label">Completed</div>
+                        <div class="card-value" id="historyCompletedCount">0</div>
+                        <div class="card-meta positive">Successfully finished</div>
+                    </div>
+                    <div class="card kpi">
+                        <div class="card-label">Cancelled</div>
+                        <div class="card-value" id="historyCancelledCount">0</div>
+                        <div class="card-meta negative">Client/Admin cancelled</div>
+                    </div>
+                    <div class="card kpi">
+                        <div class="card-label">This Month</div>
+                        <div class="card-value" id="historyMonthCount">0</div>
+                        <div class="card-meta neutral">Current month</div>
+                    </div>
+                </div>
+
+                <!-- History List Container -->
+                <div class="request-list-container">
+
+                    <div class="list-header">
+                        <h3>All Records</h3>
+                        <span id="historyCountLabel">0 records</span>
+                    </div>
+
+                    <!-- Filter Bar - Improved Layout -->
+                    <div class="filter-bar history-filters">
+
+                        <!-- Row 1: Search and Primary Filters -->
+                        <div class="filter-row">
+                            <!-- Search -->
+                            <div class="filter-group search">
+                                <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
+                                </svg>
+                                <input 
+                                    type="text" 
+                                    id="historySearch"
+                                    placeholder="Search by client, reference, booking type, or location"
+                                />
+                            </div>
+
+                            <!-- Booking Type -->
+                            <div class="filter-group">
+                                <label>Type</label>
+                                <select id="historyTypeFilter">
+                                    <option value="all">All Types</option>
+                                    <option value="popup">Popup</option>
+                                    <option value="event">Event</option>
+                                    <option value="seminar">Workshop</option>
+                                </select>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="filter-group">
+                                <label>Status</label>
+                                <select id="historyStatusFilter">
+                                    <option value="all">All Status</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="declined">Declined</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Date Range and Sort -->
+                        <div class="filter-row">
+                            <!-- Date Range -->
+                            <div class="filter-group date-range">
+                                <label>From</label>
+                                <input type="date" id="historyDateFrom" />
+                            </div>
+
+                            <div class="filter-group date-range">
+                                <label>To</label>
+                                <input type="date" id="historyDateTo" />
+                            </div>
+
+                            <!-- Sort -->
+                            <div class="filter-group">
+                                <label>Sort By</label>
+                                <select id="historySortFilter">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="name-asc">Name (A-Z)</option>
+                                    <option value="name-desc">Name (Z-A)</option>
+                                </select>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="filter-group actions">
+                                <button class="btn secondary" id="historyClearFilters">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                    </svg>
+                                    Clear Filters
+                                </button>
+                                <button class="btn accept" id="historyExport">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                                    </svg>
+                                    Export CSV
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- History List -->
+                    <section class="request-list scrollable" id="historyList">
+                        <!-- Records will be populated here -->
+                    </section>
+
+                    <!-- Empty State -->
+                    <div id="historyEmpty" class="empty-state" hidden>
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1">
+                            <path d="M9 11l3 3L22 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p>No records found</p>
+                        <span>Try adjusting your filters or check other sections</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ================= POPUP MODAL================= -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Booking Details</h3>
+                <button class="modal-close" onclick="closeDetailsModal()" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Client Information</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Name</span>
+                                <span class="detail-value" id="detailName"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Email</span>
+                                <span class="detail-value" id="detailEmail"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Account ID</span>
+                                <span class="detail-value" id="detailUserId"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Booking Ref</span>
+                                <span class="detail-value" id="detailBookingRef"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Contact</span>
+                                <span class="detail-value" id="detailContact"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Date & Time</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Date</span>
+                                <span class="detail-value" id="detailDate"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Time</span>
+                                <span class="detail-value" id="detailTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Location</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Venue</span>
+                                <span class="detail-value" id="detailLocation"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">City / Province</span>
+                                <span class="detail-value" id="detailCity"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Budget</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Amount</span>
+                                <span class="detail-value" id="detailBudget"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section" id="detailPaymentSection" style="display: none;">
+                    <div class="section-header">
+                        <h4>Payment Proof</h4>
+                    </div>
+                    <div class="section-content">
+                        <img id="detailPaymentImage" class="receipt-image" alt="Payment proof" hidden />
+                        <a id="detailPaymentLink" class="receipt-link" target="_blank" rel="noopener" hidden>View proof</a>
+                        <p id="detailPaymentName" class="info-text secondary" hidden></p>
+                        <p class="info-text secondary">Payments are verified manually from uploaded proof. Submitted payments are non-refundable.</p>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Special Requests</h4>
+                    </div>
+                    <div class="section-content">
+                        <p id="detailNotes" class="info-text notes-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer modal-actions">
+                <button class="btn decline" id="detailDecline">Decline</button>
+                <button class="btn accept" id="detailAccept">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SEMINAR MODAL================= -->
+    <div id="seminarModal" class="modal-overlay hidden">
+        <div class="modal modal-wide">
+            <div class="modal-header">
+                <div>
+                    <h3 id="seminarModalTitle">Workshop Applicants</h3>
+                    <p class="modal-meta" id="seminarModalMeta"></p>
+                </div>
+                <div class="modal-tabs">
+                    <button type="button" class="modal-tab active" id="seminarViewApplicantsBtn">
+                        View Applicants
+                    </button>
+                    <button type="button" class="modal-tab" id="seminarViewAttendeesBtn">
+                        View Attendees
+                    </button>
+                </div>
+                <button class="modal-close" onclick="closeSeminarDetails()" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section" id="seminarApplicantsSection">
+                    <div class="section-header">
+                        <h4>Applicants</h4>
+                    </div>
+                        <div class="section-content">
+                        <div class="applicant-summary">
+                              <span id="seminarApplicantCount"></span>
+                          </div>
+  
+                          <div id="seminarApplicantLoading" class="applicant-empty" hidden></div>
+  
+                          <section class="applicant-grid" id="seminarApplicantGrid"></section>
+
+                        <div id="seminarApplicantEmpty" class="applicant-empty" hidden>
+                            No applicants yet.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-section" id="seminarAttendeesSection" hidden>
+                    <div class="section-header">
+                        <h4>Attendees</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="table-container">
+                              <table class="dashboard-table">
+                                  <thead>
+                                      <tr>
+                                          <th>Attendee</th>
+                                          <th>Email</th>
+                                          <th>Type</th>
+                                          <th>Booking Ref</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="seminarAttendeeTableBody">
+                                      <tr>
+                                          <td colspan="4" class="table-loading"></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div id="seminarAttendeeEmpty" class="applicant-empty" hidden>
+                              No attendees yet.
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <!-- ================= SEMINAR BUILDER MODAL ================= -->
+    <div class="modal-overlay" id="seminarFormModal" data-role-access="admin">
+        <div class="modal modal-wide">
+            <div class="modal-header">
+                <h3>Workshop Builder</h3>
+                <button class="modal-close" id="closeSeminarFormModal" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Workshop Details</h4>
+                    </div>
+                    <div class="section-content">
+                        <form id="seminarForm" class="seminar-form">
+                            <div class="form-grid">
+                                <label>
+                                    Title
+                                    <input
+                                        type="text"
+                                        id="seminarTitleInput"
+                                        placeholder="Enter workshop title"
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    Date
+                                    <input type="date" id="seminarDateInput" required />
+                                </label>
+                                <label>
+                                    Time
+                                    <input
+                                        type="text"
+                                        id="seminarTimeInput"
+                                        placeholder="e.g. 10:00 AM - 12:00 PM"
+                                    />
+                                </label>
+                                <label>
+                                    Price (PHP)
+                                    <input
+                                        type="number"
+                                        id="seminarPriceInput"
+                                        min="0"
+                                        step="1"
+                                        placeholder="Enter ticket price"
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    Max Attendees
+                                    <input
+                                        type="number"
+                                        id="seminarMaxSlotsInput"
+                                        min="1"
+                                        step="1"
+                                        placeholder="Enter maximum attendees"
+                                    />
+                                </label>
+                                <label>
+                                    Location
+                                    <input
+                                        type="text"
+                                        id="seminarLocationInput"
+                                        placeholder="Enter venue or meeting link"
+                                    />
+                                </label>
+                                <label>
+                                    Workshop Image
+                                    <input type="file" id="seminarImageInput" accept="image/*" />
+                                </label>
+                                <label>
+                                    Preview
+                                    <img id="seminarImagePreview" class="seminar-image-preview" alt="Workshop preview" hidden />
+                                </label>
+                                <label class="form-span">
+                                    Description
+                                    <textarea
+                                        id="seminarDescInput"
+                                        rows="3"
+                                        placeholder="Describe the workshop agenda and expected outcomes"
+                                    ></textarea>
+                                </label>
+                                <label class="package-toggle" id="seminarBookingOpenRow">
+                                    Open for Booking
+                                    <input type="checkbox" id="seminarBookingOpenInput" checked />
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn accept" id="seminarSubmitBtn">Create Workshop</button>
+                                <button type="button" class="btn decline" id="seminarCancelBtn" hidden>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PACKAGE BUILDER MODAL ================= -->
+    <div class="modal-overlay" id="packageFormModal" data-role-access="admin">
+        <div class="modal modal-wide">
+            <div class="modal-header">
+                <h3>Package Builder</h3>
+                <button class="modal-close" id="closePackageFormModal" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Package Details</h4>
+                    </div>
+                    <div class="section-content">
+                        <form id="packageForm" class="package-form">
+                            <div class="form-grid">
+                                <label>
+                                    Package Name
+                                    <input
+                                        type="text"
+                                        id="packageNameInput"
+                                        placeholder="Enter package name"
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    Price (PHP)
+                                    <input
+                                        type="number"
+                                        id="packagePriceInput"
+                                        min="0"
+                                        step="1"
+                                        placeholder="Enter package price"
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    Pax
+                                    <input
+                                        type="number"
+                                        id="packagePaxInput"
+                                        min="1"
+                                        step="1"
+                                        placeholder="Enter guest capacity"
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    Inclusions
+                                    <div class="package-inclusions">
+                                        <div class="package-inclusion-field">
+                                            <span class="package-inclusion-label">Main flowers</span>
+                                            <input
+                                                type="number"
+                                                id="packageMainFlowersInput"
+                                                min="0"
+                                                step="1"
+                                                placeholder="Qty"
+                                            />
+                                        </div>
+                                        <div class="package-inclusion-field">
+                                            <span class="package-inclusion-label">Filler flowers</span>
+                                            <input
+                                                type="number"
+                                                id="packageFillersInput"
+                                                min="0"
+                                                step="1"
+                                                placeholder="Qty"
+                                            />
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="form-span">
+                                    Allowed Flowers (for customer selection)
+                                    <div class="package-flower-split">
+                                        <div class="package-flower-group">
+                                            <p class="package-flower-label">Main Flowers</p>
+                                            <div class="package-flower-options" id="packageFlowerOptionsMain"></div>
+                                        </div>
+                                        <div class="package-flower-group">
+                                            <p class="package-flower-label">Filler Flowers</p>
+                                            <div class="package-flower-options" id="packageFlowerOptionsFiller"></div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="package-toggle" id="packageActiveRow">
+                                    Active
+                                    <input type="checkbox" id="packageActiveInput" checked />
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn accept" id="packageSubmitBtn">Create Package</button>
+                                <button type="button" class="btn decline" id="packageCancelBtn" hidden>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FLOWER BUILDER MODAL ================= -->
+    <div class="modal-overlay" id="flowerFormModal" data-role-access="admin">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Flower Builder</h3>
+                <button class="modal-close" id="closeFlowerFormModal" type="button" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="section-header">
+                        <h4>Flower Details</h4>
+                    </div>
+                    <div class="section-content">
+                        <form id="flowerForm" class="package-form">
+                            <div class="form-grid">
+                                <label>
+                                    Flower Name
+                                    <input
+                                        type="text"
+                                        id="flowerNameInput"
+                                        placeholder="Enter flower name"
+                                        required
+                                    />
+                                </label>
+                                <label>
+                                    Type
+                                    <select id="flowerTypeInput" required>
+                                        <option value="main">Main Flower</option>
+                                        <option value="filler">Filler</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Flower Image
+                                    <input type="file" id="flowerImageInput" accept="image/*" />
+                                </label>
+                                <label>
+                                    Preview
+                                    <img id="flowerImagePreview" class="flower-image-preview" alt="Flower preview" hidden />
+                                </label>
+                                <label class="package-toggle" id="flowerActiveRow">
+                                    In stock
+                                    <input type="checkbox" id="flowerActiveInput" checked />
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn accept" id="flowerSubmitBtn">Add Flower</button>
+                                <button type="button" class="btn decline" id="flowerCancelBtn" hidden>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/custom-selects.js" defer></script>
+    <script type="module" src="../js/dialogs.js"></script>
+    <script type="module" src="../js/dashboard.js"></script>
+    <script type="module" src="../js/analytics.js"></script>
+    <script type="module" src="../js/history.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</body>
+</html>
+
+
+

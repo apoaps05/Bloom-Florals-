@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment | Bloom Florals</title>
+  <link rel="stylesheet" href="../css/booking.css" />
+  <link rel="stylesheet" href="../css/payment.css" />
+  <link rel="stylesheet" href="../css/selects.css" />
+  <link rel="stylesheet" href="../css/dialogs.css" />
+</head>
+<body>
+  <main class="page-wrapper">
+    <section class="booking-container fade-up">
+      
+      <!-- Back Link -->
+      <a class="back-link" href="profile.html">Back to Profile</a>
+      
+      <!-- Header -->
+      <h1>Payment Details</h1>
+      <p class="subtitle">Complete your payment to confirm your booking</p>
+      
+
+
+        <!-- Booking Summary Card -->
+        <div class="card summary-card">
+        <div class="summary-header">
+            <h2>Booking Summary</h2>
+            <div class="booking-reference">
+            <span class="ref-label">Reference No.</span>
+            <span class="ref-number" id="booking-reference">BLM-2026-0001</span>
+            </div>
+        </div>
+        
+        <div class="summary-grid">
+            <div class="summary-item">
+            <span class="summary-label">Service</span>
+            <strong class="summary-value" id="service-type">Event Bouquet</strong>
+            </div>
+            
+            <div class="summary-item">
+            <span class="summary-label">Package</span>
+            <strong class="summary-value" id="package-name">Premium Package</strong>
+            </div>
+            
+            <div class="summary-item">
+            <span class="summary-label">Event Date</span>
+            <strong class="summary-value" id="event-date">March 15, 2026</strong>
+            </div>
+            
+            <div class="summary-item">
+            <span class="summary-label">Time</span>
+            <strong class="summary-value" id="event-time">2:00 PM - 6:00 PM</strong>
+            </div>
+            
+            <div class="summary-item">
+            <span class="summary-label">Location</span>
+            <strong class="summary-value" id="event-location">Manila, Metro Manila</strong>
+            </div>
+
+            <div class="summary-item">
+            <span class="summary-label">Payment Deadline</span>
+            <strong class="summary-value" id="payment-deadline">Within 72 hours of availability confirmation</strong>
+            </div>
+            
+            <div class="summary-item total-item">
+            <span class="summary-label">Total Amount</span>
+            <strong class="summary-value total-amount" id="total-amount">&#8369;2,500.00</strong>
+            </div>
+        </div>
+        </div>
+
+      <!-- Payment Method Card -->
+      <div class="card">
+        <h2>Payment Method</h2>
+        
+        <label>Select Payment Method</label>
+        <select id="paymentMethod" required>
+          <option value="">Choose payment method</option>
+          <option value="gcash">GCash</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="paymaya">PayMaya</option>
+        </select>
+
+        <!-- Payment Instructions (Hidden by default) -->
+        <div class="payment-instructions" id="gcash-instructions" style="display: none;">
+          <div class="instruction-box">
+            <h3>GCash Payment Instructions</h3>
+            <ol>
+              <li>Send payment to: <strong>0917-123-4567</strong></li>
+              <li>Account Name: <strong>Bloom Florals</strong></li>
+              <li>Amount: <strong id="gcash-amount">&#8369;2,500.00</strong></li>
+              <li>Take a screenshot of your payment confirmation</li>
+              <li>Upload the screenshot below</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="payment-instructions" id="bank-instructions" style="display: none;">
+          <div class="instruction-box">
+            <h3>Bank Transfer Instructions</h3>
+            <ol>
+              <li>Bank: <strong>BDO</strong></li>
+              <li>Account Number: <strong>1234-5678-9012</strong></li>
+              <li>Account Name: <strong>Bloom Florals Events</strong></li>
+              <li>Amount: <strong id="bank-amount">&#8369;2,500.00</strong></li>
+              <li>Upload your deposit slip or transfer confirmation</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="payment-instructions" id="paymaya-instructions" style="display: none;">
+          <div class="instruction-box">
+            <h3>PayMaya Payment Instructions</h3>
+            <ol>
+              <li>Send payment to: <strong>0917-123-4567</strong></li>
+              <li>Account Name: <strong>Bloom Florals</strong></li>
+              <li>Amount: <strong id="paymaya-amount">&#8369;2,500.00</strong></li>
+              <li>Take a screenshot of your payment confirmation</li>
+              <li>Upload the screenshot below</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Proof Card -->
+      <div class="card">
+        <h2>Upload Proof of Payment</h2>
+        
+        <label>Upload Screenshot/Receipt</label>
+        <div class="file-upload-wrapper">
+          <input type="file" id="proof" accept="image/*,.pdf" required />
+          <div class="file-upload-display">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>Click to upload or drag and drop</p>
+            <small>PNG, JPG, PDF (max 5MB)</small>
+          </div>
+          <div class="file-preview" id="filePreview" style="display: none;">
+            <img id="previewImage" alt="Preview" />
+            <button type="button" class="remove-file" id="removeFile">&times;</button>
+          </div>
+        </div>
+        
+        <small class="hint">Please upload a clear image of your payment confirmation</small>
+      </div>
+
+<!-- Additional Notes Card -->
+      <div class="card">
+        <h2>Additional Notes (Optional)</h2>
+        
+        <label>Payment Notes</label>
+        <textarea id="notes" rows="4"></textarea>
+      </div>
+
+      <!-- NEW: Terms & Conditions Card -->
+      <div class="card terms-card">
+        <h2>Payment Terms & Conditions</h2>
+        
+        <div class="terms-content">
+          <div class="terms-section">
+            <h3>Payment Policy</h3>
+            <ul>
+              <li>Full payment must be submitted within 72 hours of availability confirmation</li>
+              <li>If payment is not submitted before the deadline, the reservation is automatically released</li>
+              <li>Payment confirmation will be reviewed within 24-48 hours</li>
+              <li>Your booking is only confirmed once payment is approved</li>
+              <li>Proof of payment must be clear and show transaction details</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>Cancellation & No Refund Policy</h3>
+            <ul>
+              <li>Payments are reviewed manually after you upload your proof of payment</li>
+              <li>All approved and submitted payments are non-refundable</li>
+              <li>Please contact our team before paying if you need any booking changes</li>
+              <li>This website records payment proof only and does not process refund transactions</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>Important Notes</h3>
+            <ul>
+              <li>Prices may vary based on flower availability and seasonal factors</li>
+              <li>We reserve the right to substitute flowers of equal or greater value</li>
+              <li>Event setup time must be confirmed 48 hours before the event</li>
+              <li>Additional charges may apply for locations outside Metro Manila</li>
+            </ul>
+          </div>
+
+          <div class="terms-section warning-section">
+            <h3>Before You Proceed</h3>
+            <ul>
+              <li>Ensure all booking details are correct before making payment</li>
+              <li>Keep your payment receipt for your records</li>
+              <li>Contact us immediately if you encounter any payment issues</li>
+              <li>For questions, reach us at <strong>support@bloomflorals.com</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Checkbox Agreement -->
+        <div class="terms-agreement">
+          <label class="checkbox-label">
+            <input type="checkbox" id="agreeTerms" required>
+            <span>I have read and agree to the payment terms, including the no-refund policy</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button class="submit-btn" id="submitPayment" disabled>
+        Submit Payment
+      </button>
+    </section>
+  </main>
+
+  <script src="../js/custom-selects.js" defer></script>
+  <script type="module" src="../js/dialogs.js"></script>
+  <script type="module" src="../js/payment.js"></script>
+</body>
+</html>
+
+

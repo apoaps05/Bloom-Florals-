@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inquiry</title>
+  <link rel="stylesheet" href="../css/booking.css" />
+  <link rel="stylesheet" href="../css/dialogs.css" />
+</head>
+<body>
+  <main class="page-wrapper">
+    <section class="booking-container fade-up">
+      <a class="back-link" href="../index.html">Back to Homepage</a>
+      <h1>Send an Inquiry</h1>
+      <p class="subtitle">Have a question? Send us a message and we will reply soon.</p>
+
+      <div class="card">
+        <h2>Your Details</h2>
+
+        <label for="inquiryName">Full Name</label>
+        <input type="text" id="inquiryName" placeholder="Enter your full name" />
+
+        <label for="inquiryEmail">Email Address</label>
+        <input type="email" id="inquiryEmail" placeholder="Enter your email address" />
+
+        <label for="inquirySubject">Subject (optional)</label>
+        <input type="text" id="inquirySubject" placeholder="What is this inquiry about?" />
+      </div>
+
+      <div class="card">
+        <h2>Your Question</h2>
+        <textarea id="inquiryMessage" placeholder="Write your question here"></textarea>
+      </div>
+
+      <button class="submit-btn" id="submitInquiry">Send Inquiry</button>
+    </section>
+  </main>
+
+  <script type="module" src="../js/dialogs.js"></script>
+  <script type="module" src="../js/inquiry.js"></script>
+</body>
+</html>
+
+

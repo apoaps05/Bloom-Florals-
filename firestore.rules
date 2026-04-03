@@ -1,0 +1,218 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function hasUserRole(role) {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == role;
+    }
+
+    function isAdminRecord() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isAdmin() {
+      return isAdminRecord() || hasUserRole('admin');
+    }
+
+    function isEmployee() {
+      return hasUserRole('employee');
+    }
+
+    function isStaff() {
+      return isAdmin() || isEmployee();
+    }
+
+    function isOwner() {
+      return isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    function isKnownBookingType(type) {
+      return type == 'popup' || type == 'event' || type == 'seminar';
+    }
+
+    function isAllowedCreateStatus(type, status) {
+      return (type == 'popup' && status == 'pending')
+        || (type == 'event' && status == 'pending_availability')
+        || (type == 'seminar' && status == 'awaiting_payment');
+    }
+
+    function isValidSeminarCreate(type) {
+      return type != 'seminar'
+        || (
+          request.resource.data.paymentStatus == 'awaiting_payment'
+          && request.resource.data.paymentDueAt is timestamp
+          && request.resource.data.confirmedAt is timestamp
+        );
+    }
+
+    function isValidBookingCreate() {
+      return isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.timestamp is timestamp
+        && isKnownBookingType(request.resource.data.bookingType)
+        && isAllowedCreateStatus(request.resource.data.bookingType, request.resource.data.status)
+        && isValidSeminarCreate(request.resource.data.bookingType);
+    }
+
+    function bookingStatusChanged() {
+      return request.resource.data.diff(resource.data).changedKeys().hasAny(['status']);
+    }
+
+    function isValidStatusTransition() {
+      return request.resource.data.status == resource.data.status
+        || (
+          resource.data.status == 'pending_availability'
+          && (
+            request.resource.data.status == 'awaiting_payment'
+            || request.resource.data.status == 'declined'
+          )
+        )
+        || (
+          resource.data.status == 'pending'
+          && (
+            request.resource.data.status == 'awaiting_payment'
+            || request.resource.data.status == 'completed'
+            || request.resource.data.status == 'declined'
+          )
+        )
+        || (
+          resource.data.status == 'awaiting_payment'
+          && (
+            request.resource.data.status == 'payment_submitted'
+            || request.resource.data.status == 'declined'
+          )
+        )
+        || (
+          resource.data.status == 'payment_submitted'
+          && (
+            request.resource.data.status == 'completed'
+            || request.resource.data.status == 'declined'
+          )
+        )
+        || (
+          (
+            resource.data.status == 'approved'
+            || resource.data.status == 'accepted'
+            || resource.data.status == 'confirmed'
+          )
+          && request.resource.data.status == 'completed'
+        );
+    }
+
+    function isStatusTransitionGuardPassed() {
+      return !bookingStatusChanged() || isValidStatusTransition();
+    }
+
+    function isPaymentWindowOpen() {
+      return resource.data.paymentDueAt is timestamp
+        && request.time < resource.data.paymentDueAt;
+    }
+
+    function isPaymentNotFinalized() {
+      return resource.data.paymentStatus != 'submitted'
+        && resource.data.paymentStatus != 'approved'
+        && resource.data.paymentStatus != 'declined'
+        && resource.data.paymentStatus != 'expired';
+    }
+
+    function isStrictPaymentUpdate() {
+      return isOwner()
+        && request.resource.data.userId == resource.data.userId
+        && resource.data.status == 'awaiting_payment'
+        && request.resource.data.status == 'payment_submitted'
+        && request.resource.data.paymentStatus == 'submitted'
+        && isPaymentWindowOpen()
+        && isPaymentNotFinalized()
+        && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'paymentMethod',
+          'paymentStatus',
+          'paymentProofName',
+          'paymentProofPath',
+          'paymentProofUrl',
+          'paymentNotes',
+          'paymentAmount',
+          'paymentSubmittedAt',
+          'status'
+        ]);
+    }
+
+    function isCancellationUpdate() {
+      return isOwner()
+        && request.resource.data.userId == resource.data.userId
+        && request.resource.data.status == 'cancelled'
+        && request.resource.data.cancelledBy == request.auth.uid
+        && resource.data.status != 'completed'
+        && resource.data.status != 'declined'
+        && resource.data.status != 'cancelled'
+        && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'status',
+          'cancelReason',
+          'cancelMessage',
+          'cancelledAt',
+          'cancelledBy'
+        ]);
+    }
+
+    function isStaffBookingUpdate() {
+      return isStaff()
+        && isStatusTransitionGuardPassed()
+        && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'status',
+          'cancelReason',
+          'cancelledAt',
+          'paymentStatus',
+          'confirmedAt',
+          'paymentDueAt'
+        ]);
+    }
+
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow create: if isSignedIn()
+        && request.auth.uid == userId
+        && request.resource.data.role == 'user';
+      allow update: if isSignedIn()
+        && request.auth.uid == userId
+        && request.resource.data.role == resource.data.role;
+      allow delete: if false;
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if isValidBookingCreate();
+      allow read: if isStaff()
+        || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow update: if isStaffBookingUpdate() || isStrictPaymentUpdate() || isCancellationUpdate();
+      allow delete: if isAdmin();
+    }
+
+    match /seminars/{seminarId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /packages/{packageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /flowers/{flowerId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /mail/{doc} {
+      allow read, write: if false;
+    }
+  }
+}

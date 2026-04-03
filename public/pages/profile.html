@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile | Bloom Florals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/dialogs.css" />
+  <!-- Profile Page CSS -->
+  <link rel="stylesheet" href="../css/profile.css" />
+  <link rel="stylesheet" href="../css/selects.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar__container">
+      
+      <!-- Logo -->
+      <a href="../index.html" class="navbar__logo">
+        <img src="../images/logo.png" alt="Bloom Florals">
+        <span class="logo-text">Bloom Florals</span>
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="navbar__toggle" id="mobile-menu" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Navigation Menu -->
+      <ul class="navbar__menu">
+        <li class="navbar__item">
+          <a href="../index.html#home" class="navbar__links">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="../index.html#about" class="navbar__links">
+            <span>About</span>
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="../index.html#services" class="navbar__links">
+            <span>Services</span>
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="../index.html#gallery" class="navbar__links">
+            <span>Gallery</span>
+          </a>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="navbar__profile">
+          <button class="profile-trigger" id="profile-toggle" aria-haspopup="true" aria-expanded="false">
+            <span class="profile-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <span class="profile-name">Account</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="profile-menu" id="profile-dropdown">
+            <div class="profile-menu-header">
+              <div class="profile-avatar-large">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="7" r="4"></circle>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                </svg>
+              </div>
+              <div class="profile-info">
+                <strong id="user-name-display">Account</strong>
+                <span id="user-email-display"></span>
+              </div>
+            </div>
+            
+            <div class="profile-menu-divider"></div>
+            
+            <a href="profile.html#profile" class="profile-menu-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>My Profile</span>
+            </a>
+            
+            <a href="profile.html#bookings" class="profile-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>My Bookings</span>
+            </a>
+            
+            <a href="profile.html#settings" class="profile-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m5.66-13.66l-4.24 4.24m0 4.24l-4.24 4.24M1 12h6m6 0h6M4.34 4.34l4.24 4.24m0 4.24l4.24 4.24"></path>
+              </svg>
+              <span>Settings</span>
+            </a>
+            
+            <div class="profile-menu-divider"></div>
+            
+            <a href="#" class="profile-menu-item danger" id="sign-out-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== PROFILE PAGE ===== -->
+  <main class="profile-page">
+
+    <!-- PROFILE HEADER -->
+    <header class="profile-header">
+      <div class="profile-avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0" />
+        </svg>
+      </div>
+
+      <div class="profile-info">
+        <h1 id="profileDisplayName"></h1>
+        <p class="profile-email" id="profileDisplayEmail"></p>
+      </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <section class="profile-layout">
+
+      <!-- LEFT COLUMN -->
+      <aside>
+
+        <!-- NAV -->
+        <div class="profile-card profile-nav">
+          <h4>User Profile</h4>
+          <button data-section="profile" class="active">Profile</button>
+          <button data-section="bookings">Bookings</button>
+          <button data-section="settings">Settings</button>
+        </div>
+
+        <!-- ACCOUNT -->
+        <div class="profile-card">
+          <a href="#" class="btn danger full">Sign out</a>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT COLUMN -->
+      <section>
+
+        <!-- PROFILE SECTION -->
+        <div id="profile" class="profile-section active profile-card">
+
+          <!-- Header -->
+          <div class="profile-header-row">
+            <div class="profile-title-group">
+              <h4>Profile</h4>
+              <p class="profile-subtitle">Manage your personal information</p>
+            </div>
+
+            <button id="editProfileBtn" class="btn ghost small">Edit</button>
+          </div>
+
+          <!-- Fields -->
+          <div class="profile-fields">
+
+            <div class="detail-row">
+              <label>Full Name</label>
+              <p id="nameText" class="field-text"></p>
+              <input id="nameInput" class="field-input" type="text" value="" placeholder="Enter your full name" hidden>
+            </div>
+
+            <div class="detail-row disabled">
+              <label>Email</label>
+              <p class="field-text" id="emailText"></p>
+              <span class="field-note">Email can't be changed</span>
+            </div>
+
+            <div class="detail-row">
+              <label>Contact Number</label>
+              <p id="contactText" class="field-text"></p>
+              <input id="contactInput" class="field-input" type="text" value="" placeholder="Enter your contact number" hidden>
+            </div>
+
+          </div>
+
+          <!-- Actions -->
+          <div class="profile-actions" id="profileActions" hidden>
+            <button id="saveProfileBtn" class="btn primary">
+              Save Changes
+            </button>
+            <button id="cancelProfileBtn" class="btn ghost">
+              Cancel
+            </button>
+          </div>
+
+        </div>
+
+        <!-- BOOKINGS SECTION -->
+        <div id="bookings" class="profile-section profile-card">
+          <div class="profile-header-row">
+            <div class="profile-title-group">
+              <h4>Bookings & Events</h4>
+              <p class="profile-subtitle">Track your ongoing and past reservations</p>
+            </div>
+          </div>
+
+          <div class="booking-toolbar">
+            <div class="booking-tabs" role="tablist" aria-label="Booking view">
+              <button class="booking-tab active" id="bookingTabOngoing" type="button">Ongoing</button>
+              <button class="booking-tab" id="bookingTabDone" type="button">Completed</button>
+            </div>
+
+            <div class="booking-filters">
+              <div class="filter-field search">
+                <label for="bookingSearch">Search</label>
+                <input
+                  type="text"
+                  id="bookingSearch"
+                  placeholder="Search by reference, title, or location"
+                />
+              </div>
+
+              <div class="filter-field">
+                <label for="bookingTypeFilter">Type</label>
+                <select id="bookingTypeFilter">
+                  <option value="all">All Types</option>
+                  <option value="popup">Popup</option>
+                  <option value="event">Event</option>
+                  <option value="seminar">Workshop</option>
+                </select>
+              </div>
+
+              <div class="filter-field">
+                <label for="bookingStatusFilter">Status</label>
+                <select id="bookingStatusFilter">
+                  <option value="all">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="awaiting_payment">Awaiting Payment</option>
+                  <option value="payment_submitted">Payment Submitted</option>
+                </select>
+              </div>
+
+              <button class="btn ghost" id="bookingClearFilters" type="button">
+                Clear Filters
+              </button>
+            </div>
+          </div>
+
+          <p id="bookingsLoading" class="booking-empty loading-indicator" hidden aria-live="polite"></p>
+          <p id="bookingsEmpty" class="booking-empty" hidden>No bookings yet.</p>
+
+          <div class="booking-group" id="ongoingGroup" hidden>
+            <div class="booking-group-header">
+              <h5>Ongoing</h5>
+              <span class="booking-count" id="ongoingCount"></span>
+            </div>
+            <div id="bookingOngoing"></div>
+          </div>
+
+          <div class="booking-group" id="pastGroup" hidden>
+            <div class="booking-group-header">
+              <h5>Past</h5>
+              <span class="booking-count" id="pastCount"></span>
+            </div>
+            <div id="bookingPast"></div>
+          </div>
+        </div>
+
+        <!-- SETTINGS SECTION -->
+        <div id="settings" class="profile-section profile-card">
+          <h4>Settings</h4>
+
+          <label class="setting-row">
+            <span>Email Notifications</span>
+            <input type="checkbox" checked>
+          </label>
+
+          <div class="settings-divider"></div>
+
+          <div class="settings-security" id="passwordSettings" hidden>
+            <h5>Set a Password</h5>
+            <p class="settings-help">If you sign in with Google, set a password to allow email + password sign-in.</p>
+
+            <div class="settings-grid">
+              <label class="settings-field">
+                <span>New Password</span>
+                <input type="password" id="newPassword" placeholder="Minimum 8 characters">
+              </label>
+              <label class="settings-field">
+                <span>Confirm Password</span>
+                <input type="password" id="confirmNewPassword" placeholder="Re-enter new password">
+              </label>
+            </div>
+
+            <button id="setPasswordBtn" class="btn">Set Password</button>
+            <p id="passwordMessage" class="settings-message" role="status" aria-live="polite" hidden></p>
+          </div>
+        </div>
+
+      </section>
+    </section>
+  </main>
+
+  <!-- MODAL OVERLAY -->
+  <div class="modal-overlay" id="detailsModal">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h3 id="modalTitle">Event Title</h3>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Date & Time Section -->
+        <div class="modal-section">
+          <div class="section-header">
+            <h4>Date & Time</h4>
+          </div>
+          <div class="section-content">
+            <p id="modalDate" class="info-text"></p>
+          </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="modal-section">
+          <div class="section-header">
+            <h4>Location</h4>
+          </div>
+          <div class="section-content">
+            <p id="modalLocationType" class="info-label"></p>
+            <p id="modalAddress" class="info-text"></p>
+            <p id="modalLandmark" class="info-text"></p>
+          </div>
+        </div>
+
+        <!-- Booking Details Section -->
+        <div class="modal-section">
+          <div class="section-header">
+            <h4>Booking Details</h4>
+          </div>
+          <div class="section-content">
+            <div class="detail-grid" id="modalDetailsGrid">
+              <!-- Details will be populated here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Proof Section -->
+        <div class="modal-section" id="modalProofSection" style="display: none;">
+          <div class="section-header">
+            <h4>Payment Proof</h4>
+          </div>
+          <div class="section-content">
+            <img id="modalProofImage" class="receipt-image" alt="Payment receipt" hidden />
+            <a id="modalProofLink" class="receipt-link" target="_blank" rel="noopener" hidden>View full receipt</a>
+            <p id="modalProofName" class="info-text secondary" hidden></p>
+          </div>
+        </div>
+
+        <!-- Client Information Section -->
+        <div class="modal-section">
+          <div class="section-header">
+            <h4>Client Information</h4>
+          </div>
+          <div class="section-content">
+            <p id="modalClientName" class="info-text"></p>
+            <p id="modalClientEmail" class="info-text"></p>
+          </div>
+        </div>
+
+        <!-- Special Requests Section -->
+        <div class="modal-section" id="modalNotesSection" style="display: none;">
+          <div class="section-header">
+            <h4>Special Requests</h4>
+          </div>
+          <div class="section-content">
+            <p id="modalNotes" class="info-text notes-text"></p>
+          </div>
+        </div>
+
+        <!-- Status Section -->
+        <div class="modal-section">
+          <div class="section-header">
+            <h4>Status</h4>
+          </div>
+          <div class="section-content">
+            <p id="modalStatus" class="info-text"></p>
+            <p id="modalSubmitted" class="info-text secondary"></p>
+          </div>
+        </div>
+
+        <!-- Cancellation Section (only shown if cancelled) -->
+        <div class="modal-section" id="modalCancelSection" style="display: none;">
+          <div class="section-header">
+            <h4>Cancellation Details</h4>
+          </div>
+          <div class="section-content">
+            <p id="modalCancelReason" class="info-text"></p>
+            <p id="modalCancelMessage" class="info-text"></p>
+            <p id="modalCancelDate" class="info-text secondary"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="pay-now-btn" id="payNowBtn" hidden>
+        Pay Now
+      </button>
+      <button class="cancel-booking-btn" id="openCancelModal">
+        Cancel Booking
+      </button>
+
+    </div>
+  </div>
+
+  <!-- CANCEL CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="cancelModal">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h3>Cancel Booking</h3>
+        <button class="modal-close" id="closeCancelModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <p class="cancel-note">Please select a reason for cancelling:</p>
+
+        <div class="cancel-reasons">
+          <label class="reason-option">
+            <input type="radio" name="cancelReason" value="Schedule conflict">
+            <span>Schedule conflict</span>
+          </label>
+
+          <label class="reason-option">
+            <input type="radio" name="cancelReason" value="Personal reasons">
+            <span>Personal reasons</span>
+          </label>
+
+          <label class="reason-option">
+            <input type="radio" name="cancelReason" value="Found another vendor">
+            <span>Found another vendor</span>
+          </label>
+
+          <label class="reason-option">
+            <input type="radio" name="cancelReason" value="Event cancelled">
+            <span>Event cancelled</span>
+          </label>
+
+          <label class="reason-option">
+            <input type="radio" name="cancelReason" value="Other">
+            <span>Other</span>
+          </label>
+        </div>
+
+        <label class="input-label">Additional details (optional):</label>
+        <textarea
+          class="cancel-message"
+          placeholder="Add any context that can help us process your cancellation"
+        ></textarea>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="profile-btn btn-secondary" id="backBtn">Back</button>
+        <button class="profile-btn danger" id="confirmCancel">Confirm Cancellation</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/custom-selects.js" defer></script>
+  <script type="module" src="../js/dialogs.js"></script>
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/profile.js"></script>
+  <script type="module" src="../js/nav-auth.js"></script>
+</body>
+</html>
+
+
